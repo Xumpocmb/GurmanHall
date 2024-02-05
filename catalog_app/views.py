@@ -4,12 +4,12 @@ from catalog_app.models import Category, Product
 
 def catalog(request, slug=None):
     if slug:
-        goods = get_list_or_404(Product.objects.filter(category__slug=slug))
+        products = get_list_or_404(Product.objects.filter(category__slug=slug))
     else:
-        goods = None
+        products = Product.objects.all()
     context = {
         'title': 'Каталог',
         'categories': Category.objects.all(),
-        'goods': goods,
+        'products': products,
     }
     return render(request, 'catalog_app/menu.html', context=context)
