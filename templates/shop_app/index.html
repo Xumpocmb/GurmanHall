@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link type="image/x-icon" rel="shortcut icon" href="./img/sushi-roll.png">
+    <link rel="stylesheet" href="sass/normalize.css">
+    <link rel="stylesheet" href="sass/style.css">
+    <title>{{ title }}</title>
+</head>
+
+<body>
+<!-- НАЧАЛО СТРАНИЦЫ -->
+<div id="container" class="container">
+    <header id="header" class="header">
+        <!-- ВЕРХНЕЕ МЕНЮ -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="menu/menu.html">Меню</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#footer">Контакты</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#filter-menu__link">О нас</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- КОНЕЦ ВЕРХНЕГО МЕНЮ-->
+        <!-- ХЕДЕР -->
+        <div class="header__logo-drop">
+            <div class="header__logo-title">
+                <div class="header__logo">
+                    <a href="index.html"><img src="img/logo_002.png" alt="logo"></a>
+                </div>
+                <div class="header__nav-title">
+                    <h1 class="header__title">Готовим изысканные роллы!</h1>
+                    <div class="collapse" id="navbarToggleExternalContent">
+                        <div class="bg-dark p-4">
+                            <h5 class="text-white h4">Collapsed content</h5>
+                            <span class="text-muted">Toggleable via the navbar brand.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="header__btn-block">
+                    <!-- кнопка вход -->
+                    <a class="btn btn-success" href="#" role="button">Вход</a>
+                    <!-- начало кнопки корзина -->
+                    <a class="btn btn-success header__link-basket" href="#" role="button">
+                        <div class="header__basket">
+                            <img src="img/basket2.png" alt="basket">
+                        </div>
+                        Корзина
+                    </a>
+                    <!-- конец кнопки корзина -->
+                    <div class="dropdown">
+                        <!-- начало кнопки профиль -->
+                        <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                            Профиль
+                        </button>
+                        <!-- конец кнопки профиль -->
+                        <!-- выпадающий список -->
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Заказы</a></li>
+                            <li><a class="dropdown-item" href="#">Админ панель</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Выход</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- КОНЕЦ ХЕДЕРА-->
+    </header>
+    <!-- КОНТЕНТ -->
+    <main id="main" class="main">
+        <section id="video" class="video">
+            <div class="header__video-block">
+                <video class="header__video" src="video/rolss.mp4" autoplay loop muted>
+                </video>
+            </div>
+            <hr class="video__band">
+        </section>
+        <!-- СЛАЙДЕР -->
+        <section id="slider" class="slider">
+            <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                <div id="carousel-indicators" class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
+                            aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                </div>
+                <div id="carousel-inner" class="carousel-inner">
+                    <div class="carousel-item active" data-bs-interval="10000">
+                        <img src="img/rolls.jpg" class="d-block w-100" alt="rolls">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Роллы на любой вкус</h5>
+                        </div>
+                    </div>
+                    <div class="carousel-item" data-bs-interval="2000">
+                        <img src="img/pizza.jpg" class="d-block w-100" alt="pizza">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Все виды пиццы</h5>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="img/fastfood.jpg" class="d-block w-100" alt="fastfood">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Фри, наггетсы, луковые кольца!</h5>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            <hr id="slider__band" class="slider__band">
+        </section>
+        <!-- КОНЕЦ СЛАЙДЕРА -->
+        <section class="filter-menu">
+            <div class="row">
+                <div class="col justify-content-center">
+                    <!-- начало ссылки меню раздела -->
+                    <a class="filter-menu__link" href="menu/menu.html">
+                        <div class="filter-menu__img-block">
+                            <img class="filter-menu__img" src="img/rolls-card.jpg" alt="rolls-card">
+                        </div>
+                        <p class="filter-menu__title">Роллы</p>
+                    </a>
+                    <!-- конец ссылки меню раздела -->
+                </div>
+                <div class="col justify-content-center">
+                    <!-- начало ссылки меню раздела -->
+                    <a class="filter-menu__link" href="menu/menu.html">
+                        <div class="filter-menu__img-block">
+                            <img class="filter-menu__img" src="img/pizza-card.jpg" alt="rolls-card">
+                        </div>
+                        <p class="filter-menu__title">Пицца</p>
+                    </a>
+                    <!-- конец ссылки меню раздела -->
+                </div>
+                <div class="col justify-content-center">
+                    <!-- начало ссылки меню раздела -->
+                    <a class="filter-menu__link" href="menu/menu.html">
+                        <div class="filter-menu__img-block">
+                            <img class="filter-menu__img" src="img/rolls-card.jpg" alt="rolls-card">
+                        </div>
+                        <p class="filter-menu__title">Роллы</p>
+                    </a>
+                    <!-- конец ссылки меню раздела -->
+                </div>
+                <div class="col justify-content-center">
+                    <!-- начало ссылки меню раздела -->
+                    <a class="filter-menu__link" href="menu/menu.html">
+                        <div class="filter-menu__img-block">
+                            <img class="filter-menu__img" src="img/fastfood-card.jpg" alt="rolls-card">
+                        </div>
+                        <p class="filter-menu__title">Закуски</p>
+                    </a>
+                    <!-- конец ссылки меню раздела -->
+                </div>
+                <div class="col justify-content-center">
+                    <!-- начало ссылки меню раздела -->
+                    <a class="filter-menu__link" href="menu/menu.html">
+                        <div class="filter-menu__img-block">
+                            <img class="filter-menu__img" src="img/rolls-card.jpg" alt="rolls-card">
+                        </div>
+                        <p class="filter-menu__title">Роллы</p>
+                    </a>
+                    <!-- конец ссылки меню раздела -->
+                </div>
+                <div class="col justify-content-center">
+                    <!-- начало ссылки меню раздела -->
+                    <a id="filter-menu__link" class="filter-menu__link" href="menu/menu.html">
+                        <div class="filter-menu__img-block">
+                            <img class="filter-menu__img" src="img/rolls-card.jpg" alt="rolls-card">
+                        </div>
+                        <p class="filter-menu__title">Роллы</p>
+                    </a>
+                    <!-- конец ссылки меню раздела -->
+                </div>
+            </div>
+        </section>
+        <section id="about" class="about">
+            <hr class="about__band">
+            <h2 class="about__title">О НАС</h2>
+            <div class="about__info-wrapper">
+                <div class="about__info-block">
+                    <div class="about__img-info-block">
+                        <img src="img/info-img1.jpg" alt="info-img">
+                    </div>
+                    <div class="about__info-text-block">
+                        <h3 class="about__info-title">Мы с глубоким уважением следуем законам и традициям японской
+                            кухни.</h3>
+                        <p class="about__info-text">
+                            В Беларуси роллы пользуются широкой популярностью. К сожалению, несмотря на разнообразие
+                            предложений,
+                            найти
+                            настоящие
+                            роллы, готовые в полном соответствии с канонами исторической родины, бывает довольно сложно.
+                            В <span
+                                class="about__logo-word">Гурман хол</span> мы
+                            с особым
+                            вниманием соблюдаем законы и традиции японской кухни, проявляя уважение к истории блюд,
+                            которые готовим.
+                        </p>
+                    </div>
+                </div>
+                <div class="about__info-block">
+                    <div class="about__info-text-block">
+                        <h3 class="about__info-title">Стандарты и опытные специалисты на каждом этапе.</h3>
+                        <p class="about__info-text">
+                            Свежие ингредиенты, продуманная композиция и профессиональные нормы, соблюдаемые на каждом
+                            этапе,
+                            обеспечивают
+                            гарантированный вкус нашей пиццы. Мы используем пергамент под пиццей, чтобы предотвратить ее
+                            прилипание
+                            и избежать
+                            отсыревания дна коробки. При упаковке вашего заказа в термосумку менеджер смены осматривает
+                            пиццу и
+                            запечатывает коробку
+                            специальной лентой для контроля качества.
+                            <br>
+                            <br>
+                            Благодаря четко настроенной системе контроля качества, внедренной на нашем производстве, мы
+                            исключаем
+                            возможность
+                            отправки клиенту продукции, не соответствующей установленным стандартам.
+                        </p>
+                    </div>
+                    <div class="about__img-info-block">
+                        <img src="img/info-pizza.jpg" alt="info-img">
+                    </div>
+                </div>
+            </div>
+            <div class="about__delivery-block">
+                <h3 class="about__info-title">Доставка!</h3>
+                <p class="about__text">Сервис доставки <span class="about__logo-word">Гурман хол</span> трансформирует
+                    атмосферу
+                    нашего ресторана прямо у
+                    вас дома.
+                    Раскрывая перед вами
+                    ресторанный опыт, наши курьеры отличаются стильным сервисом, точностью и дружелюбием, принося
+                    атмосферу
+                    нашего
+                    заведения
+                    в любую точку города. <br>
+                    <br>
+                    Миссия нашего бренда заключается в том, чтобы быть друзьями для наших клиентов, разделять их
+                    повседневные
+                    радости, быть
+                    частью ключевых моментов и всегда поднимать настроение! <br>
+                    <br>
+                    <span class="about__logo-word">Гурман хол</span> предлагает широкий выбор блюд: изысканные суши и
+                    роллы,
+                    ароматные пиццы, а также
+                    аппетитные
+                    порции
+                    горячей картошки фри и многое другое. <br>
+                    <br>
+                    Наша цель - чтобы каждый заказ и доставка с <span class="about__logo-word">Гурман хол</span>
+                    приносили
+                    только
+                    положительные впечатления
+                    каждому
+                    нашему
+                    клиенту. <br>
+                    <br>
+                    Приятного выбора! <br>
+                    <br>
+                    С уважением, команда <span class="about__logo-word">Гурман хол</span>
+                </p>
+            </div>
+        </section>
+        <a href="#container" id="scrolTop">
+            <img src="img/arrow_top.png" alt="arrow-top">
+        </a>
+    </main>
+    <!-- КОНЕЦ КОНТЕНТА -->
+    <!-- ФУТЕР -->
+    <footer id="footer" class="footer">
+        <div class="footer__contact-block">
+            <p class="footer__contact">Контакты</p>
+            <ul class="footer__icon-text-block">
+                <li class="footer__icon-text">
+                    <a class="footer__text"
+                       href="https://yandex.by/maps/21015/baranavichy/house/ZkwYfwBjSkUDQFtpfX1xeH5qZg==/?ll=25.973304%2C53.109293&z=17"
+                       target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path
+                                    d="M16.6663 8.33329C16.6663 12.0152 9.99967 18.3333 9.99967 18.3333C9.99967 18.3333 3.33301 12.0152 3.33301 8.33329C3.33301 4.65139 6.31778 1.66663 9.99967 1.66663C13.6816 1.66663 16.6663 4.65139 16.6663 8.33329Z"
+                                    stroke="#E1D4C9" stroke-width="1.5"/>
+                            <path
+                                    d="M10.0003 9.16667C10.4606 9.16667 10.8337 8.79357 10.8337 8.33333C10.8337 7.8731 10.4606 7.5 10.0003 7.5C9.54009 7.5 9.16699 7.8731 9.16699 8.33333C9.16699 8.79357 9.54009 9.16667 10.0003 9.16667Z"
+                                    fill="#E1D4C9" stroke="#E1D4C9" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round"/>
+                        </svg>
+                        <p>Ул. Тексер, 4а г. Барановичи</p>
+                    </a>
+                </li>
+                <li class="footer__icon-text">
+                    <a class="footer__text" href="tel:+375445555820">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path
+                                    d="M15.0984 12.2516L11.6665 12.9166C9.34845 11.7531 7.91654 10.4166 7.08321 8.33329L7.72483 4.89154L6.51197 1.66663L3.72946 1.66663C2.60191 1.66663 1.71466 2.59958 1.90108 3.71161C2.29888 6.08454 3.37231 10.0391 6.24987 12.9166C9.27338 15.9401 13.5661 17.3318 16.1378 17.9288C17.299 18.1983 18.3332 17.2908 18.3332 16.0988L18.3332 13.4843L15.0984 12.2516Z"
+                                    stroke="#E1D4C9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <p>+375 (44) 55-55-820</p>
+                        <div class="footer__operator">
+                            <img src="img/a1.jpg" alt="a1">
+                        </div>
+                    </a>
+                </li>
+                <li class="footer__icon-text">
+                    <a class="footer__text" href="tel:+375445555286">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path
+                                    d="M15.0984 12.2516L11.6665 12.9166C9.34845 11.7531 7.91654 10.4166 7.08321 8.33329L7.72483 4.89154L6.51197 1.66663L3.72946 1.66663C2.60191 1.66663 1.71466 2.59958 1.90108 3.71161C2.29888 6.08454 3.37231 10.0391 6.24987 12.9166C9.27338 15.9401 13.5661 17.3318 16.1378 17.9288C17.299 18.1983 18.3332 17.2908 18.3332 16.0988L18.3332 13.4843L15.0984 12.2516Z"
+                                    stroke="#E1D4C9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <p>+375 (29) 55-55-268</p>
+                        <div class="footer__operator">
+                            <img src="img/mts.jpg" alt="mts">
+                        </div>
+                    </a>
+                </li>
+                <li class="footer__icon-text">
+                    <div class="footer__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <g clip-path="url(#clip0_217_1736)">
+                                <path d="M10 5L10 10L15 10" stroke="#E1D4C9" stroke-width="1.5" stroke-linecap="round"
+                                      stroke-linejoin="round"/>
+                                <path
+                                        d="M10.0003 18.3333C14.6027 18.3333 18.3337 14.6023 18.3337 9.99996C18.3337 5.39759 14.6027 1.66663 10.0003 1.66663C5.39795 1.66663 1.66699 5.39759 1.66699 9.99996C1.66699 14.6023 5.39795 18.3333 10.0003 18.3333Z"
+                                        stroke="#E1D4C9" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round"/>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_217_1736">
+                                    <rect width="20" height="20" fill="white"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="footer__work-time">
+                        <p class="footer__stroke">Без выходных: 11:00 – 23:00 </p>
+                        <p class="footer__stroke">Заказы принимаются до 22:45</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="footer__social-block">
+            <h2 class="footer__soc-title">Жуем, Любуемся, Улыбаемся. <br>
+                Время роллов – наслаждаемся!</h2>
+            <a href="https://www.instagram.com/gurman.hall/">
+                <div class="footer__soc">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path
+                                d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z"
+                                stroke="#E1D4C9" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path
+                                d="M3 16V8C3 5.23858 5.23858 3 8 3H16C18.7614 3 21 5.23858 21 8V16C21 18.7614 18.7614 21 16 21H8C5.23858 21 3 18.7614 3 16Z"
+                                stroke="#E1D4C9"/>
+                        <path d="M17.5 6.51L17.51 6.49889" stroke="#E1D4C9" stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </a>
+        </div>
+    </footer>
+    <!-- КОНЕЦ ФУТЕРА -->
+</div>
+<!-- СКРИПТЫ -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        crossorigin="anonymous"></script>
+<script src="js/script.js"></script>
+<!-- КОНЕЦ СКРИПТОВ -->
+</body>
+<!-- КОНЕЦ СТРАНИЦЫ -->
+<!-- -->
+</html>
