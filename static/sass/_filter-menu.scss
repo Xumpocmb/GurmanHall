@@ -1,0 +1,32 @@
+.filter-menu {
+  &__link {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    border-radius: 5px;
+    border: 1px solid #eee;
+    box-shadow: 0 0 15px 0 #eee;
+    transition: box-shadow 0.3s ease-in-out;
+    text-decoration: none;
+  }
+
+  &__link:hover {
+    box-shadow: 0 0 15px 0 #ccc;
+  }
+
+  &__title {
+    position: absolute;
+    left: 10%;
+    bottom: 7%;
+    @include font($size: 2.5rem, $weight: 700, $height: 1.4rem);
+    color: black;
+  }
+}
+
+.row {
+  padding: 30px;
+  align-items: center;
+  @include media-mobile {
+    margin: 0;
+  }
+}

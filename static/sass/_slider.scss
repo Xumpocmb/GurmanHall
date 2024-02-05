@@ -1,0 +1,23 @@
+.slider {
+  &__band {
+    margin: 20px auto 0;
+    width: 90%;
+    color: #079c5a;
+  }
+}
+
+.carousel-item {
+  height: 40rem;
+}
+
+.carousel-item img {
+  object-fit: contain;
+  height: 90%;
+  width: 50%;
+}
+
+h5 {
+  margin-bottom: 20px;
+  @include font($size: 3.5rem, $weight: 700, $height: 1rem);
+  @extend %font-caveat;
+}

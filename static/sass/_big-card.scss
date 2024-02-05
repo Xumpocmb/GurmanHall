@@ -1,0 +1,106 @@
+.big-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__main-container {
+    position: relative;
+    min-height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include media-mobile {
+      min-height: 80vh;
+    }
+  }
+
+  &__card-block {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 900px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    @include media-desctop-small {
+      flex-direction: column;
+      width: 600px;
+    }
+    @include media-tablet {
+      width: 370px;
+    }
+  }
+
+  &__img-block {
+    width: 50%;
+    border: 0.5px solid gray;
+    height: 24.5rem;
+    @include media-desctop-small {
+      width: 60%;
+    }
+    @include media-tablet {
+      width: 90%;
+    }
+  }
+
+  &__img-block img {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__text-block {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    @include media-desctop-small {
+      align-items: center;
+    }
+  }
+
+  &__btn {
+    justify-content: center;
+  }
+
+  &__title {
+    @include font($size: 3rem, $weight: 700, $height: 2.5rem);
+    @extend %font-caveat;
+    color: #079c5a;
+    margin: 0;
+  }
+
+  &__desc-text {
+    @include font($size: 1.4rem, $weight: 600, $height: 2.4rem);
+    @extend %font-prompt;
+    margin: 0;
+  }
+
+  &__compound-text {
+    @include font($size: 1.5rem, $weight: 400, $height: 2.4rem);
+    @extend %font-prompt;
+    color: gray;
+    margin: 0;
+    @include media-tablet {
+      @include font($size: 1.4rem, $weight: 400, $height: 2.4rem);
+    }
+  }
+
+  &__price {
+    @include font($size: 1.8rem, $weight: 600, $height: 2.4rem);
+    @extend %font-prompt;
+    margin: 0;
+  }
+}
+
+.big-card__img {
+  cursor: all-scroll;
+  transition: transform 0.3s ease-in-out;
+}
+
+.big-card__img-block {
+  overflow: hidden;
+}
+
+.big-card__img-block:hover .big-card__img {
+  transform: scale(1.5);
+}
