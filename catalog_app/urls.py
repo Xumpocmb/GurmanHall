@@ -1,9 +1,9 @@
 from django.urls import path
-from shop_app.views import index
+from catalog_app.views import catalog
 
-app_name = 'shop_app'
+app_name = 'catalog_app'
 
 urlpatterns = [
-    # path('', index, name='index'),
-    # path('about/', about, name='about'),
+    path('', catalog, name='catalog'),
+    path('<slug:slug>/', catalog, name='catalog'),
 ]

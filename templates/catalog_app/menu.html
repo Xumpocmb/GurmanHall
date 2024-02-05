@@ -1,0 +1,213 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <main class="main">
+        <section id="cards" class="cards">
+            <!-- БОКОВОЕ МЕНЮ -->
+            <aside class="cards__aside">
+                <!-- начало меню фильтра -->
+                <div class="cards__filter">
+                    <p class="cards__menu">Меню</p>
+                    <div class="cards__filter-el">
+                        {% for category in categories %}
+                            <div class="cards__el">
+                                <a class="cards__link" href="{% url 'catalog_app:catalog' category.slug %}">{{ category.name }}</a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- конец меню фильтра -->
+            </aside>
+            <!-- КОНЕЦ БОКОВОГО МЕНЮ -->
+            <!-- КАРТОЧКИ ТОВАРОВ -->
+            <div class="row cards__row">
+                <div class="col justify-content-center">
+                    <!-- начало карточки товара -->
+                    <div class="card">
+                        <img src="../img/azalia.png" class="card-img-top" alt="azalia">
+                        <div class="card-body">
+                            <h5 class="card-title">Азалия</h5>
+                            <div class="cards__price-btn">
+                                <p class="card-text">
+                                    <del>20р.</del>
+                                    <ins>15р.</ins>
+                                </p>
+                                <a href="#" class="btn btn-success cards__btn">
+                                    <div class="cards__basket">
+                                        <img src="../img/basket2.png" alt="basket">
+                                    </div>
+                                    <p class="cards__basket-title">в корзину</p>
+                                </a>
+                            </div>
+                            <p class="cards__description">
+                                водоросли нори 0,5,
+                                рис 140 гр,
+                                сыр креметто 55 гр,
+                                свежий огурчик 20 гр,
+                                лосось 30 гр
+                            </p>
+                        </div>
+                    </div>
+                    <!-- конец карточки товара -->
+                </div>
+                <div class="col justify-content-center">
+                    <!-- начало карточки товара -->
+                    <div class="card">
+                        <img src="../img/azalia.png" class="card-img-top" alt="azalia">
+                        <div class="card-body">
+                            <h5 class="card-title">Азалия</h5>
+                            <div class="cards__price-btn">
+                                <p class="card-text">20р.
+                                </p>
+                                <a href="#" class="btn btn-success cards__btn">
+                                    <div class="cards__basket">
+                                        <img src="../img/basket2.png" alt="basket">
+                                    </div>
+                                    <p class="cards__basket-title">в корзину</p>
+                                </a>
+                            </div>
+                            <p class="cards__description">
+                                водоросли нори 0,5,
+                                рис 140 гр,
+                                сыр креметто 55 гр,
+                                свежий огурчик 20 гр,
+                                лосось 30 гр
+                            </p>
+                        </div>
+                    </div>
+                    <!-- конец карточки товара -->
+                </div>
+                <div class="col justify-content-center">
+                    <!-- начало карточки товара -->
+                    <div class="card">
+                        <img src="../img/azalia.png" class="card-img-top" alt="azalia">
+                        <div class="card-body">
+                            <h5 class="card-title">Азалия</h5>
+                            <div class="cards__price-btn">
+                                <p class="card-text">20р.
+                                </p>
+                                <a href="#" class="btn btn-success cards__btn">
+                                    <div class="cards__basket">
+                                        <img src="../img/basket2.png" alt="basket">
+                                    </div>
+                                    <p class="cards__basket-title">в корзину</p>
+                                </a>
+                            </div>
+                            <p class="cards__description">
+                                водоросли нори 0,5,
+                                рис 140 гр,
+                                сыр креметто 55 гр,
+                                свежий огурчик 20 гр,
+                                лосось 30 гр
+                            </p>
+                        </div>
+                    </div>
+                    <!-- конец карточки товара -->
+                </div>
+                <div class="col justify-content-center">
+                    <!-- начало карточки товара -->
+                    <div class="card">
+                        <img src="../img/azalia.png" class="card-img-top" alt="azalia">
+                        <div class="card-body">
+                            <h5 class="card-title">Азалия</h5>
+                            <div class="cards__price-btn">
+                                <p class="card-text">20р.
+                                </p>
+                                <a href="#" class="btn btn-success cards__btn">
+                                    <div class="cards__basket">
+                                        <img src="../img/basket2.png" alt="basket">
+                                    </div>
+                                    <p class="cards__basket-title">в корзину</p>
+                                </a>
+                            </div>
+                            <p class="cards__description">
+                                водоросли нори 0,5,
+                                рис 140 гр,
+                                сыр креметто 55 гр,
+                                свежий огурчик 20 гр,
+                                лосось 30 гр
+                            </p>
+                        </div>
+                    </div>
+                    <!-- конец карточки товара -->
+                </div>
+                <div class="col justify-content-center">
+                    <!-- начало карточки товара -->
+                    <div class="card">
+                        <img src="../img/azalia.png" class="card-img-top" alt="azalia">
+                        <div class="card-body">
+                            <h5 class="card-title">Азалия</h5>
+                            <div class="cards__price-btn">
+                                <p class="card-text">20р.
+                                </p>
+                                <a href="#" class="btn btn-success cards__btn">
+                                    <div class="cards__basket">
+                                        <img src="../img/basket2.png" alt="basket">
+                                    </div>
+                                    <p class="cards__basket-title">в корзину</p>
+                                </a>
+                            </div>
+                            <p class="cards__description">
+                                водоросли нори 0,5,
+                                рис 140 гр,
+                                сыр креметто 55 гр,
+                                свежий огурчик 20 гр,
+                                лосось 30 гр
+                            </p>
+                        </div>
+                    </div>
+                    <!-- конец карточки товара -->
+                </div>
+                <div class="col justify-content-center">
+                    <!-- начало карточки товара -->
+                    <div class="card">
+                        <img src="../img/azalia.png" class="card-img-top" alt="azalia">
+                        <div class="card-body">
+                            <h5 class="card-title">Азалия</h5>
+                            <div class="cards__price-btn">
+                                <p class="card-text">20р.
+                                </p>
+                                <a href="#" class="btn btn-success cards__btn">
+                                    <div class="cards__basket">
+                                        <img src="../img/basket2.png" alt="basket">
+                                    </div>
+                                    <p class="cards__basket-title">в корзину</p>
+                                </a>
+                            </div>
+                            <p class="cards__description">
+                                водоросли нори 0,5,
+                                рис 140 гр,
+                                сыр креметто 55 гр,
+                                свежий огурчик 20 гр,
+                                лосось 30 гр
+                            </p>
+                        </div>
+                    </div>
+                    <!-- конец карточки товара -->
+                </div>
+                <!-- начало пагинации -->
+                <nav aria-label="Page navigation example">
+                    <ul id="pagination" class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- конец пагинации -->
+            </div>
+            <!-- КОНЕЦ КАРТОЧКИ ТОВАРОВ -->
+        </section>
+    </main>
+{% endblock %}
