@@ -12,8 +12,8 @@
                     <div class="cards__filter-el">
                         {% for category in categories %}
                             <div class="cards__el">
-                                <a class="cards__link"
-                                   href="{% url 'catalog_app:catalog' %}{{ category.slug }}">{{ category.name }}</a>
+                                <a class="cards__link" {% if category.slug  == nav_link %} style="color: #079c5a; font-weight: bold" {% endif %}
+                                   href="{% url 'catalog_app:catalog' category.slug %}">{{ category.name }}</a>
                             </div>
                         {% endfor %}
                     </div>
@@ -22,71 +22,80 @@
             <!-- КОНЕЦ МЕНЮ-->
             <!-- КАРТОЧКИ-->
             <div class="row cards__row">
-                {% for product in products %}
-                    <div class="col justify-content-center">
-                        <div class="card">
-                            <div class="card-img-top-block">
-                                <img src="
+                {% if not products %}
+                    <div class="text-center" style="background-color: #079c5a; border-radius: 50px">
+                        <h1 style="font-size: 2.5em;">Простите, мы еще ничего не приготовили...</h1>
+                    </div>
+                {% else %}
+                    {% for product in products %}
+                        <div class="col justify-content-center">
+                            <div class="card">
+                                <div class="card-img-top-block">
+                                    <img src="
                                         
-                                        {% if product.image %}{{ product.image.url }}{% else %}{% static 'img/not_found.png' %}{% endif %}"
-                                     class="card-img-top" alt="{{ product.name }}">
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">{{ product.name }}</h5>
-                                <p class="cards__description">{{ product.description }}</p>
-                                <div class="cards__price-btn">
-                                    <div class="cards__price-sum">
-                                        <p class="card-text">
-                                            {% if product.discount %}
-                                                <del>{{ product.price }}р.</del>
-                                                <ins>{{ product.sell_price }}р.</ins>
-                                            {% else %}
-                                                <ins>{{ product.price }}р.</ins>
-                                            {% endif %}
-                                        </p>
-                                        {% if product.quantity %}
-                                            <p class="cards__sum">{{ product.quantity }}шт.</p>
-                                        {% endif %}
-                                        {% if product.weight %}
-                                            <p class="cards__sum">{{ product.weight }}гр.</p>
-                                        {% endif %}
-                                    </div>
-                                    <a href="#" class="btn btn-success cards__btn">
-                                        <div class="cards__basket">
-                                            <img src="{% static 'img/basket2.png' %}" alt="basket">
-                                        </div>
-                                        <p class="cards__basket-title">Беру!</p>
-                                    </a>
+                                        
+                                            {% if product.image %}{{ product.image.url }}{% else %}{% static 'img/not_found.png' %}{% endif %}"
+                                         class="card-img-top" alt="{{ product.name }}">
                                 </div>
-
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ product.name }}</h5>
+                                    <p class="cards__description">{{ product.description }}</p>
+                                    <div class="cards__price-btn">
+                                        <div class="cards__price-sum">
+                                            <p class="card-text">
+                                                {% if product.discount %}
+                                                    <del>{{ product.price }}р.</del>
+                                                    <ins>{{ product.sell_price }}р.</ins>
+                                                {% else %}
+                                                    <ins>{{ product.price }} р.</ins>
+                                                {% endif %}
+                                            </p>
+                                            {% if product.quantity %}
+                                                <p class="cards__sum">{{ product.quantity }}шт.</p>
+                                            {% endif %}
+                                            {% if product.weight %}
+                                                <p class="cards__sum">{{ product.weight }}гр.</p>
+                                            {% endif %}
+                                        </div>
+                                        <a href="{% url 'catalog_app:product' product.slug %}" class="btn btn-success cards__btn">
+                                            <div class="cards__basket">
+                                                <img src="{% static 'img/basket2.png' %}" alt="basket">
+                                            </div>
+                                            <p class="cards__basket-title">Беру!</p>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
-                <!-- начало пагинации -->
-                <nav aria-label="Page navigation example">
-                    <ul id="pagination" class="pagination">
-                        <li class="page-item {% if not products.has_previous %} disabled {% endif %}">
-                            <a class="page-link" href="{% if products.has_previous %}?
-                        {% change_params page=products.previous_page_number %}{% else %}#{% endif %}" aria-label="Previous">
-                                <span aria-hidden="true">Previous</span>
-                            </a>
-                        </li>
-                        {% for page in products.paginator.page_range %}
-                            {% if page >= products.number|add:-2 and page <= products.number|add:2 %}
-                                <li class="page-item {% if products.number == page %}active{% endif %} ">
-                                    <a class="page-link" href="?{% change_params page=page %}">{{ page }}</a>
-                                </li>
-                            {% endif %}
-                        {% endfor %}
-                        <li class="page-item {% if not products.has_next %} disabled {% endif %}">
-                            <a class="page-link" href="
+                    {% endfor %}
+                    <!-- начало пагинации -->
+                    <nav aria-label="Page navigation example">
+                        <ul id="pagination" class="pagination">
+                            <li class="page-item {% if not products.has_previous %} disabled {% endif %}">
+                                <a class="page-link" href="{% if products.has_previous %}?
+                        {% change_params page=products.previous_page_number %}{% else %}#{% endif %}"
+                                   aria-label="Previous">
+                                    <span aria-hidden="true">Previous</span>
+                                </a>
+                            </li>
+                            {% for page in products.paginator.page_range %}
+                                {% if page >= products.number|add:-2 and page <= products.number|add:2 %}
+                                    <li class="page-item {% if products.number == page %}active{% endif %} ">
+                                        <a class="page-link" href="?{% change_params page=page %}">{{ page }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                            <li class="page-item {% if not products.has_next %} disabled {% endif %}">
+                                <a class="page-link" href="
                                     {% if products.has_next %}?
                                 {% change_params page=products.next_page_number %}{% else %}#{% endif %}">Next</a>
-                        </li>
-                    </ul>
-                </nav>
-                <!-- конец пагинации -->
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- конец пагинации -->
+                {% endif %}
+
+
             </div>
             <!-- КОНЕЦ КАРТОЧКИ-->
         </section>

@@ -4,7 +4,6 @@ from django.core.paginator import Paginator
 
 
 def catalog(request, slug=None):
-
     if slug:
         products = Product.objects.filter(category__slug=slug)
     else:
@@ -18,5 +17,14 @@ def catalog(request, slug=None):
         'title': 'Каталог',
         'categories': Category.objects.all(),
         'products': current_page,
+        'nav_link': slug,
     }
     return render(request, 'catalog_app/menu.html', context=context)
+
+
+def product(request, slug):
+    item = Product.objects.get(slug=slug)
+    context = {
+        'product': item,
+    }
+    return render(request, 'catalog_app/card.html', context=context)

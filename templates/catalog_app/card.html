@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <main class="main">
+        <section class="big-card">
+            <!-- начало карточки товара -->
+            <div class="big-card__main-container">
+                <div class="big-card__card-block">
+                    <div class="big-card__img-block">
+                        <img src="
+                                {% if product.image %}{{ product.image.url }}{% else %}{% static 'img/not_found.png' %}{% endif %}"
+                             class="big-card__img" alt="{{ product.name }}">
+                    </div>
+                    <div class="big-card__text-block">
+                        <h2 class="big-card__title">{{ product.name }}</h2>
+
+                        <p class="big-card__compound-text">{{ product.description }}</p>
+                        <div class="big-card__price-quantity-block">
+                            <p class="big-card__price">
+                                {% if product.discount %}
+                                    <del>{{ product.price }}р.</del>
+                                    <ins>{{ product.sell_price }}р.</ins>
+                                {% else %}
+                                    <ins>{{ product.price }}р.</ins>
+                                {% endif %}
+                            </p>
+                            <p class="big-card__desc-text">В порции:
+                                {% if product.quantity %}{{ product.quantity }} шт.{% endif %}
+                                {% if product.weight %}{{ product.weight }} гр.{% endif %}</p>
+                        </div>
+                        <div class="big-card__quantity-controller">
+                            Количество порций для заказа:
+                            <button class="big-card__dark big-card__max">-</button>
+                            <span class="big-card__number">1</span>
+                            <button class="big-card__green big-card__max">+</button>
+                        </div>
+                        <p class="big-card__souce-text">Шапочку запеченных роллов можно полить соусом:
+                        </p>
+                        <form class="big-card__form" action="#" method="post">
+                            {% csrf_token %}
+                            <div class="big__card-souce-block">
+                                <div class="big-card__souse-item">
+                                    <label class="big-card__label">
+                                        <input type="radio" name="souse-option" class="radio" value="Мацарелла">
+                                        <span class="radio-custom"></span>
+                                        <span class="label">Мацарелла</span>
+                                    </label>
+                                </div>
+                                <div class="big-card__souse-item">
+                                    <label class="big-card__label">
+                                        <input type="radio" name="souse-option" class="radio" value="Чесночный">
+                                        <span class="radio-custom"></span>
+                                        <span class="label">Чесночный</span>
+                                    </label>
+                                </div>
+                                <div class="big-card__souse-item">
+                                    <label class="big-card__label">
+                                        <input type="radio" name="souse-option" class="radio" value="Спайси">
+                                        <span class="radio-custom"></span>
+                                        <span class="label">Спайси</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success cards__btn big-card__btn">В корзину</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- конец карточки товара -->
+        </section>
+    </main>
+{% endblock %}
+    

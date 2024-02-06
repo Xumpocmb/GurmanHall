@@ -54,7 +54,7 @@ body {
   flex: 1 1 auto;
 }
 
-.footer__stroke, .footer__text, .big-card__souce-text, .big-card__price, .big-card__compound-text, .big-card__desc-text, .about__info-text, .about__text, .card-text, .cards__sum, .btn-success, .nav-link, .navbar-brand {
+.footer__stroke, .footer__text, .big-card__number, .big-card__max, .big-card__label, .big-card__souce-text, .big-card__price, .big-card__compound-text, .big-card__desc-text, .about__info-text, .about__text, .card-text, .cards__sum, .btn-success, .nav-link, .navbar-brand {
   font-family: "Prompt", sans-serif;
 }
 
@@ -346,9 +346,7 @@ body {
 }
 
 .card-body {
-    flex: 0 1 auto;
-    padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
-    color: var(--bs-card-color);
+  flex: 0 1 auto;
 }
 
 .card-title {
@@ -372,9 +370,9 @@ body {
 }
 
 .card-img-top-block {
-  // height: 170px;
-  object-fit: cover;
   overflow: hidden;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .card-img-top {
@@ -394,7 +392,7 @@ body {
 }
 
 .pagination .page-link {
-  color: #079c5a;
+  color: #000000;
   font-size: 1.6rem;
   font-style: normal;
   font-weight: 400;
@@ -404,7 +402,6 @@ body {
 .pagination .page-item.active .page-link {
   background-color: #079c5a;
   border-color: #079c5a;
-  color: white;
 }
 
 .page-link:hover {
@@ -661,9 +658,9 @@ h5 {
   justify-content: center;
   align-items: center;
 }
-@media (max-width: 586px) {
+@media (max-width: 991px) {
   .big-card__main-container {
-    min-height: 80vh;
+    min-height: 65vh;
   }
 }
 .big-card__card-block {
@@ -676,6 +673,10 @@ h5 {
   justify-content: center;
   align-items: center;
   gap: 30px;
+}
+.big__card-souce-block {
+  display: flex;
+  gap: 20px;
 }
 @media (max-width: 991px) {
   .big-card__card-block {
@@ -721,7 +722,7 @@ h5 {
   justify-content: center;
 }
 .big-card__title {
-  font-size: 3rem;
+  font-size: 5rem;
   font-style: normal;
   font-weight: 700;
   line-height: 2.5rem;
@@ -752,23 +753,78 @@ h5 {
   }
 }
 .big-card__price {
-  font-size: 1.8rem;
+  font-size: 2.8rem;
   font-style: normal;
   font-weight: 600;
   line-height: 2.4rem;
   margin: 0;
 }
 .big-card__souce-text {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-style: normal;
   font-weight: 400;
   line-height: 2.4rem;
   margin: 0;
 }
+.big-card__form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.big-card__label {
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2.4rem;
+}
+.big-card__max {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-size: 2.1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2.4rem;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.big-card__quantity-controller {
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.big-card__green {
+  background-color: #079c5a;
+}
+.big-card__green:hover {
+  background-color: #146c43;
+  transition: 0.3s;
+}
+.big-card__dark:hover {
+  background-color: gray;
+  transition: 0.3s;
+}
+.big-card__price-quantity-block {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.big-card__number {
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1rem;
+}
 
 .big-card__img {
   cursor: all-scroll;
   transition: transform 0.3s ease-in-out;
+  object-fit: contain;
 }
 
 .big-card__img-block {
@@ -777,6 +833,31 @@ h5 {
 
 .big-card__img-block:hover .big-card__img {
   transform: scale(1.5);
+}
+
+.label.selected {
+  color: #079c5a;
+}
+
+.radio {
+  display: none;
+}
+
+.radio-custom {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 5px solid gray;
+  background-color: white;
+  border-radius: 50%;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.radio:checked + .radio-custom {
+  border-color: #079c5a;
+  box-shadow: 0 1px 1px rgba(255, 198, 5, 0.05), 0 2px 2px rgba(255, 198, 5, 0.05), 0 4px 4px rgba(255, 198, 5, 0.05), 0 8px 8px rgba(255, 198, 5, 0.05), 0 16px 16px rgba(255, 198, 5, 0.05), 0 32px 32px rgba(255, 198, 5, 0.05), 0 -2px 4px rgba(255, 198, 5, 0.05);
 }
 
 .footer {

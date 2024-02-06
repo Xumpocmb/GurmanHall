@@ -8,8 +8,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    @include media-mobile {
-      min-height: 80vh;
+    @include media-desctop-small {
+      min-height: 65vh;
     }
   }
 
@@ -90,6 +90,67 @@
     @extend %font-prompt;
     margin: 0;
   }
+
+  &__souce-text {
+    @include font($size: 1.5rem, $weight: 400, $height: 2.4rem);
+    @extend %font-prompt;
+    margin: 0;
+  }
+
+  &__form {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__label {
+    @include font($size: 1.7rem, $weight: 400, $height: 2.4rem);
+    @extend %font-prompt;
+  }
+
+  &__max {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    @include font($size: 2.1rem, $weight: 400, $height: 2.4rem);
+    @extend %font-prompt;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__quantity-controller {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__green {
+    background-color: #079c5a;
+  }
+
+  &__green:hover {
+    background-color: #146c43;
+    transition: 0.3s;
+  }
+
+  &__dark:hover {
+    background-color: gray;
+    transition: 0.3s;
+  }
+
+  &__price-quantity-block {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__number {
+    @include font($size: 1.5rem, $weight: 400, $height: 1rem);
+    @extend %font-prompt;
+  }
 }
 
 .big-card__img {
@@ -103,4 +164,32 @@
 
 .big-card__img-block:hover .big-card__img {
   transform: scale(1.5);
+}
+
+.label.selected {
+  color: #079c5a;
+}
+
+.radio {
+  display: none;
+}
+
+.radio-custom {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 5px solid gray;
+  background-color: white;
+  border-radius: 50%;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.radio:checked + .radio-custom {
+  border-color: #079c5a;
+  box-shadow: 0 1px 1px rgba(255, 198, 5, 0.05),
+    0 2px 2px rgba(255, 198, 5, 0.05), 0 4px 4px rgba(255, 198, 5, 0.05),
+    0 8px 8px rgba(255, 198, 5, 0.05), 0 16px 16px rgba(255, 198, 5, 0.05),
+    0 32px 32px rgba(255, 198, 5, 0.05), 0 -2px 4px rgba(255, 198, 5, 0.05);
 }

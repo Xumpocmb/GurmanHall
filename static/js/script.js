@@ -1,19 +1,45 @@
 //изменение кнопки "в корзину"
-document.querySelectorAll(".btn.btn-success.cards__btn").forEach((button) => {
-  button.addEventListener("click", (event) => {
-    event.preventDefault();
-    const basketTitle = event.target.parentElement.querySelector(
-      ".cards__basket-title"
-    );
-    const basketText = basketTitle.textContent;
+// document.querySelectorAll(".btn.btn-success.cards__btn").forEach((button) => {
+//   button.addEventListener("click", (event) => {
+//     event.preventDefault();
+//     const basketTitle = event.target.parentElement.querySelector(
+//       ".cards__basket-title"
+//     );
+//     const basketText = basketTitle.textContent;
+//
+//     basketTitle.textContent = "супер!";
+//
+//     setTimeout(() => {
+//       basketTitle.textContent = basketText;
+//     }, 1000);
+//   });
+// });
 
-    basketTitle.textContent = "супер!";
+//счетчик
+const incrementButton = document.querySelector(
+  ".big-card__green.big-card__max"
+);
+const decrementButton = document.querySelector(".big-card__dark.big-card__max");
+const counterDisplay = document.querySelector(".big-card__number");
 
-    setTimeout(() => {
-      basketTitle.textContent = basketText;
-    }, 1000);
-  });
-});
+let counterValue = parseInt(counterDisplay.textContent, 10);
+
+function incrementCounter() {
+  if (counterValue < 25) {
+    counterValue++;
+    counterDisplay.textContent = counterValue;
+  }
+}
+
+function decrementCounter() {
+  if (counterValue > 1) {
+    counterValue--;
+    counterDisplay.textContent = counterValue;
+  }
+}
+
+incrementButton.addEventListener("click", incrementCounter);
+decrementButton.addEventListener("click", decrementCounter);
 
 document.querySelectorAll(".big-card__card-block").forEach(function (card) {
   card.addEventListener("mousemove", function (e) {
