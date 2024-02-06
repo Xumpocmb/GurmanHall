@@ -4,7 +4,7 @@ from catalog_app.models import Category, Product
 
 def catalog(request, slug=None):
     if slug:
-        products = get_list_or_404(Product.objects.filter(category__slug=slug))
+        products = Product.objects.filter(category__slug=slug)
     else:
         products = Product.objects.all()
     context = {

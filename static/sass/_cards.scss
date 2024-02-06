@@ -102,6 +102,7 @@
 
   &__price-sum {
     display: flex;
+    align-items: center;
     gap: 5px;
   }
 
@@ -117,7 +118,7 @@
 }
 
 .card {
-  min-width: 270px;
+  width: 290px;
   overflow: hidden;
   cursor: pointer;
 }
@@ -138,7 +139,14 @@
   background-color: #079c5a;
 }
 
+.card-img-top-block {
+  height: 170px;
+  overflow: hidden;
+}
+
 .card-img-top {
+  width: 100%;
+  height: 100%;
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
   transform-origin: center;

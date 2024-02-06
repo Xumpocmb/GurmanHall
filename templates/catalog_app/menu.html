@@ -1,51 +1,65 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block content %}
     <main class="main">
         <section id="cards" class="cards">
-            <!-- БОКОВОЕ МЕНЮ -->
+            <!-- БОКОВОЕ МЕНЮ-->
             <aside class="cards__aside">
-                <!-- начало меню фильтра -->
                 <div class="cards__filter">
                     <p class="cards__menu">Меню</p>
                     <div class="cards__filter-el">
                         {% for category in categories %}
                             <div class="cards__el">
                                 <a class="cards__link"
-                                   href="{% url 'catalog_app:catalog' category.slug %}">{{ category.name }}</a>
+                                   href="{% url 'catalog_app:catalog' %}{{ category.slug }}">{{ category.name }}</a>
                             </div>
                         {% endfor %}
                     </div>
                 </div>
-                <!-- конец меню фильтра -->
             </aside>
-            <!-- КОНЕЦ БОКОВОГО МЕНЮ -->
-            <!-- КАРТОЧКИ ТОВАРОВ -->
+            <!-- КОНЕЦ МЕНЮ-->
+            <!-- КАРТОЧКИ-->
             <div class="row cards__row">
                 {% for product in products %}
-                	<div class="col justify-content-center">
-                    <div class="card">
-                        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ product.name }}</h5>
-                            <div class="cards__price-btn">
-                                <div class="cards__price-sum">
-                                    <p class="card-text">{{ product.price }}р.
-                                    </p>
-                                    <p class="cards__sum">8шт.</p>
-                                </div>
-                                <a href="#" class="btn btn-success cards__btn">
-                                    <div class="cards__basket">
-                                        <img src="{% static 'img/basket2.png' %}" alt="basket">
-                                    </div>
-                                    <p class="cards__basket-title">В корзину</p>
-                                </a>
+                    <div class="col justify-content-center">
+                        <div class="card">
+                            <div class="card-img-top-block">
+                                <img src="
+                                        
+                                        {% if product.image %}{{ product.image.url }}{% else %}{% static 'img/not_found.png' %}{% endif %}"
+                                     class="card-img-top" alt="{{ product.name }}">
                             </div>
-                            <p class="cards__description">{{ product.description }}</p>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ product.name }}</h5>
+                                <p class="cards__description">{{ product.description }}</p>
+                                <div class="cards__price-btn">
+                                    <div class="cards__price-sum">
+                                        <p class="card-text">
+                                            {% if product.discount %}
+                                                <del>{{ product.price }}р.</del>
+                                                <ins>{{ product.sell_price }}р.</ins>
+                                            {% else %}
+                                                <ins>{{ product.price }}р.</ins>
+                                            {% endif %}
+                                        </p>
+                                        {% if product.quantity %}
+                                            <p class="cards__sum">{{ product.quantity }}шт.</p>
+                                        {% endif %}
+                                        {% if product.weight %}
+                                            <p class="cards__sum">{{ product.weight }}гр.</p>
+                                        {% endif %}
+                                    </div>
+                                    <a href="#" class="btn btn-success cards__btn">
+                                        <div class="cards__basket">
+                                            <img src="{% static 'img/basket2.png' %}" alt="basket">
+                                        </div>
+                                        <p class="cards__basket-title">Беру!</p>
+                                    </a>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-                </div>
                 {% endfor %}
                 <!-- начало пагинации -->
                 <nav aria-label="Page navigation example">
@@ -68,7 +82,8 @@
                 </nav>
                 <!-- конец пагинации -->
             </div>
-            <!-- КОНЕЦ КАРТОЧКИ ТОВАРОВ -->
+            <!-- КОНЕЦ КАРТОЧКИ-->
         </section>
     </main>
 {% endblock %}
+    

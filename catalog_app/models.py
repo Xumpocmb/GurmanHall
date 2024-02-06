@@ -3,7 +3,7 @@ from django.db import models
 
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True, verbose_name='Название категории')
-    image = models.ImageField(upload_to='media/category_images', blank=True, null=True, verbose_name='Изображение')
+    image = models.ImageField(upload_to='category_images', blank=True, null=True, verbose_name='Изображение')
     slug = models.SlugField(max_length=100, unique=True, blank=True, null=True, verbose_name='URL')
 
     class Meta:
@@ -19,7 +19,7 @@ class Product(models.Model):
     name = models.CharField(max_length=250, verbose_name='Название')
     slug = models.SlugField(max_length=250, unique=True, blank=True, null=True, verbose_name='URL')
     description = models.TextField(blank=True, null=True, default='Описание отсутствует', verbose_name='Описание')
-    image = models.ImageField(upload_to='media/product_images', blank=True, null=True, verbose_name='Изображение')
+    image = models.ImageField(upload_to='product_images', blank=True, null=True, verbose_name='Изображение')
     price = models.DecimalField(default=0.00, max_digits=8, decimal_places=2, verbose_name='Цена')
     weight = models.IntegerField(default=0, verbose_name='Вес (если известно)')
     quantity = models.IntegerField(default=0, verbose_name='Количество штук (если известно)')
