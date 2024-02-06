@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load catalog_tags %}
+
 {% block content %}
     <main class="main">
         <section id="cards" class="cards">
@@ -64,19 +66,23 @@
                 <!-- начало пагинации -->
                 <nav aria-label="Page navigation example">
                     <ul id="pagination" class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
+                        <li class="page-item {% if not products.has_previous %} disabled {% endif %}">
+                            <a class="page-link" href="{% if products.has_previous %}?
+                        {% change_params page=products.previous_page_number %}{% else %}#{% endif %}" aria-label="Previous">
+                                <span aria-hidden="true">Previous</span>
                             </a>
                         </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
+                        {% for page in products.paginator.page_range %}
+                            {% if page >= products.number|add:-2 and page <= products.number|add:2 %}
+                                <li class="page-item {% if products.number == page %}active{% endif %} ">
+                                    <a class="page-link" href="?{% change_params page=page %}">{{ page }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        <li class="page-item {% if not products.has_next %} disabled {% endif %}">
+                            <a class="page-link" href="
+                                    {% if products.has_next %}?
+                                {% change_params page=products.next_page_number %}{% else %}#{% endif %}">Next</a>
                         </li>
                     </ul>
                 </nav>

@@ -373,6 +373,7 @@ body {
 
 .card-img-top-block {
   // height: 170px;
+  object-fit: cover;
   overflow: hidden;
 }
 
@@ -403,6 +404,7 @@ body {
 .pagination .page-item.active .page-link {
   background-color: #079c5a;
   border-color: #079c5a;
+  color: white;
 }
 
 .page-link:hover {
