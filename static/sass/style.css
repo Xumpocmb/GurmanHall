@@ -760,7 +760,7 @@ h5 {
   margin: 0;
 }
 .big-card__souce-text {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-style: normal;
   font-weight: 400;
   line-height: 2.4rem;
@@ -772,17 +772,19 @@ h5 {
   gap: 10px;
 }
 .big-card__label {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-style: normal;
   font-weight: 400;
   line-height: 2.4rem;
 }
 .big-card__max {
+  color: white;
   width: 35px;
   height: 35px;
-  border-radius: 50%;
+  border-radius: 50px;
   border: none;
   cursor: pointer;
+  text-decoration: none;
   font-size: 2.1rem;
   font-style: normal;
   font-weight: 400;
@@ -798,15 +800,20 @@ h5 {
   align-items: center;
   gap: 10px;
 }
+
+.big-card__dark {
+  background-color: gray;
+  transition: 0.3s;
+}
+.big-card__dark:hover {
+  background-color: darkslategrey;
+  transition: 0.3s;
+}
 .big-card__green {
   background-color: #079c5a;
 }
 .big-card__green:hover {
   background-color: #146c43;
-  transition: 0.3s;
-}
-.big-card__dark:hover {
-  background-color: gray;
   transition: 0.3s;
 }
 .big-card__price-quantity-block {
@@ -815,6 +822,11 @@ h5 {
   gap: 10px;
 }
 .big-card__number {
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  border-radius: 50px;
+  border: solid 1px gray;
   font-size: 1.5rem;
   font-style: normal;
   font-weight: 400;

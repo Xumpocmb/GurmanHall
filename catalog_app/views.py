@@ -1,6 +1,8 @@
-from django.shortcuts import render, get_list_or_404
-from catalog_app.models import Category, Product
 from django.core.paginator import Paginator
+from django.shortcuts import HttpResponseRedirect
+from django.shortcuts import render
+
+from catalog_app.models import Category, Product
 
 
 def catalog(request, slug=None):
@@ -26,5 +28,22 @@ def product(request, slug):
     item = Product.objects.get(slug=slug)
     context = {
         'product': item,
+        'title': item.name,
     }
     return render(request, 'catalog_app/card.html', context=context)
+
+
+def add_to_basket(request, slug):
+    current_page = request.META.get('HTTP_REFERER')
+    item = Product.objects.get(slug=slug)
+    count = request.GET.get('count')
+    if item.category.slug == 'zapechennyee-rolly':
+        souce = request.GET.get('souse-option')
+    else:
+        souce = 'Без соуса'
+    print(f'Продукт: {item.name} | Количество {count} | Соус для запеченных роллов: {souce}')
+    return HttpResponseRedirect(current_page)
+
+
+def not_found(request):
+    return render(request, '404.html')

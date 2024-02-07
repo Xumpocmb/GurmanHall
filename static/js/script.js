@@ -22,19 +22,19 @@ const incrementButton = document.querySelector(
 const decrementButton = document.querySelector(".big-card__dark.big-card__max");
 const counterDisplay = document.querySelector(".big-card__number");
 
-let counterValue = parseInt(counterDisplay.textContent, 10);
+let counterValue = parseInt(counterDisplay.value, 10);
 
 function incrementCounter() {
   if (counterValue < 25) {
     counterValue++;
-    counterDisplay.textContent = counterValue;
+    counterDisplay.value = counterValue;
   }
 }
 
 function decrementCounter() {
   if (counterValue > 1) {
     counterValue--;
-    counterDisplay.textContent = counterValue;
+    counterDisplay.value = counterValue;
   }
 }
 

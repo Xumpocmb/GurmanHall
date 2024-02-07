@@ -9,6 +9,9 @@
                 <div class="big-card__card-block">
                     <div class="big-card__img-block">
                         <img src="
+                                
+                                
+                                
                                 {% if product.image %}{{ product.image.url }}{% else %}{% static 'img/not_found.png' %}{% endif %}"
                              class="big-card__img" alt="{{ product.name }}">
                     </div>
@@ -29,39 +32,43 @@
                                 {% if product.quantity %}{{ product.quantity }} шт.{% endif %}
                                 {% if product.weight %}{{ product.weight }} гр.{% endif %}</p>
                         </div>
-                        <div class="big-card__quantity-controller">
-                            Количество порций для заказа:
-                            <button class="big-card__dark big-card__max">-</button>
-                            <span class="big-card__number">1</span>
-                            <button class="big-card__green big-card__max">+</button>
-                        </div>
-                        <p class="big-card__souce-text">Шапочку запеченных роллов можно полить соусом:
-                        </p>
-                        <form class="big-card__form" action="#" method="post">
-                            {% csrf_token %}
-                            <div class="big__card-souce-block">
-                                <div class="big-card__souse-item">
-                                    <label class="big-card__label">
-                                        <input type="radio" name="souse-option" class="radio" value="Мацарелла">
-                                        <span class="radio-custom"></span>
-                                        <span class="label">Мацарелла</span>
-                                    </label>
-                                </div>
-                                <div class="big-card__souse-item">
-                                    <label class="big-card__label">
-                                        <input type="radio" name="souse-option" class="radio" value="Чесночный">
-                                        <span class="radio-custom"></span>
-                                        <span class="label">Чесночный</span>
-                                    </label>
-                                </div>
-                                <div class="big-card__souse-item">
-                                    <label class="big-card__label">
-                                        <input type="radio" name="souse-option" class="radio" value="Спайси">
-                                        <span class="radio-custom"></span>
-                                        <span class="label">Спайси</span>
-                                    </label>
-                                </div>
+
+                        <form class="big-card__form" action="{% url 'catalog_app:add_to_basket' product.slug %}"
+                              method="get">
+                            <div class="big-card__quantity-controller">
+                                Количество порций для заказа:
+                                <a class="big-card__dark big-card__max">-</a>
+                                {#                                <span class="big-card__number" id="count">1</span>#}
+                                <input type="text" class="big-card__number" value="1" name="count">
+                                <a class="big-card__green big-card__max">+</a>
                             </div>
+                            {% if product.category.slug == 'zapechennyee-rolly' %}
+                                <p class="big-card__souce-text">Шапочку запеченных роллов можно полить соусом:</p>
+                                <div class="big__card-souce-block">
+                                    <div class="big-card__souse-item">
+                                        <label class="big-card__label">
+                                            <input type="radio" name="souse-option" class="radio" value="Мацарелла"
+                                                   checked="checked">
+                                            <span class="radio-custom"></span>
+                                            <span class="label">Мацарелла</span>
+                                        </label>
+                                    </div>
+                                    <div class="big-card__souse-item">
+                                        <label class="big-card__label">
+                                            <input type="radio" name="souse-option" class="radio" value="Чесночный">
+                                            <span class="radio-custom"></span>
+                                            <span class="label">Чесночный</span>
+                                        </label>
+                                    </div>
+                                    <div class="big-card__souse-item">
+                                        <label class="big-card__label">
+                                            <input type="radio" name="souse-option" class="radio" value="Спайси">
+                                            <span class="radio-custom"></span>
+                                            <span class="label">Спайси</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            {% endif %}
                             <button type="submit" class="btn btn-success cards__btn big-card__btn">В корзину</button>
                         </form>
                     </div>
