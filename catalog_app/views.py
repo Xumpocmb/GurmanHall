@@ -52,7 +52,7 @@ def add_to_basket(request, slug):
         form_data = request.POST.get('form')
         decoded_data = urllib.parse.unquote(form_data)
         form_dict = dict(item.split('=') for item in decoded_data.split('&'))
-        count = int(form_dict.get('count'))
+        count = escape(int(form_dict.get('count')))
         souse_option = escape(form_dict.get('souse-option'))
         print(item.name, count, souse_option)
         return JsonResponse({'success': True})
