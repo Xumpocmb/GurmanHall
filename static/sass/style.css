@@ -659,7 +659,6 @@ h5 {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 115px 0;
 }
 .big-card__card-block {
   width: 900px;
@@ -697,7 +696,8 @@ h5 {
 .big-card__img-block img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 .big-card__text-block {
   display: flex;
@@ -713,12 +713,12 @@ h5 {
   justify-content: center;
 }
 .big-card__title {
-    font-size: 5rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 2.5rem;
-    color: #079c5a;
-    margin: 0;
+  font-size: 3rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 2.5rem;
+  color: #079c5a;
+  margin: 0;
 }
 .big-card__desc-text {
   font-size: 1.4rem;
@@ -728,12 +728,12 @@ h5 {
   margin: 0;
 }
 .big-card__compound-text {
-	font-size: 1.5rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 2.4rem;
-    color: gray;
-    margin: 0;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2.4rem;
+  color: gray;
+  margin: 0;
 }
 @media (max-width: 767px) {
   .big-card__compound-text {
@@ -744,11 +744,11 @@ h5 {
   }
 }
 .big-card__price {
-	font-size: 2.8rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 2.4rem;
-    margin: 0
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 2.4rem;
+  margin: 0;
 }
 .big-card__souce-text {
   font-size: 1.7rem;
@@ -759,41 +759,37 @@ h5 {
 }
 .big-card__form {
   display: flex;
-  flex-direction: column;
   gap: 10px;
+  flex-direction: column;
 }
 .big-card__label {
-  font-size: 1.4rem;
+  font-size: 1.7rem;
   font-style: normal;
   font-weight: 400;
   line-height: 2.4rem;
 }
 .big-card__max {
   color: white;
-    width: 35px;
-    height: 35px;
-    border-radius: 50px;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 2.1rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 2.4rem;
-    outline: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 2.1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2.4rem;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .big-card__quantity-controller {
-  font-size: 1.8rem;
   display: flex;
   align-items: center;
   gap: 10px;
-}
-.big-card__dark {
-    background-color: gray;
-    transition: 0.3s;
+  font-size: 1.8rem;
 }
 .big-card__green {
   background-color: #079c5a;
@@ -801,6 +797,9 @@ h5 {
 .big-card__green:hover {
   background-color: #146c43;
   transition: 0.3s;
+}
+.big-card__dark {
+  background-color: lightgrey;
 }
 .big-card__dark:hover {
   background-color: gray;
@@ -812,15 +811,15 @@ h5 {
   gap: 10px;
 }
 .big-card__number {
-	width: 35px;
-    height: 35px;
-    text-align: center;
-    border-radius: 50px;
-    border: solid 1px gray;
-    font-size: 1.5rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1rem;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  border-radius: 50px;
+  border: solid 1px gray;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1rem;
 }
 
 .big-card__img {
@@ -859,6 +858,11 @@ h5 {
 .radio:checked + .radio-custom {
   border-color: #079c5a;
   box-shadow: 0 1px 1px rgba(255, 198, 5, 0.05), 0 2px 2px rgba(255, 198, 5, 0.05), 0 4px 4px rgba(255, 198, 5, 0.05), 0 8px 8px rgba(255, 198, 5, 0.05), 0 16px 16px rgba(255, 198, 5, 0.05), 0 32px 32px rgba(255, 198, 5, 0.05), 0 -2px 4px rgba(255, 198, 5, 0.05);
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .footer {

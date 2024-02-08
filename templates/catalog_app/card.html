@@ -5,7 +5,7 @@
     <main class="main">
         <section class="big-card">
             <!-- начало карточки товара -->
-            <div class="big-card__main-container">
+            <div class="row big-card__main-container">
                 <div class="big-card__card-block">
                     <div class="big-card__img-block">
                         <img src="{% if product.image %}{{ product.image.url }}
@@ -34,7 +34,7 @@
                               method="get">
                         {% csrf_token %}
                             <div class="big-card__quantity-controller">
-                                Количество порций для заказа:
+                                <label for="counter_value">Количество порций для заказа:</label>
                                 <a id="big-card__dark" class="big-card__dark big-card__max">-</a>
                                 <input id="counter_value" type="text" class="big-card__number" value="1" name="count">
                                 <a id="big-card__green" class="big-card__green big-card__max">+</a>
