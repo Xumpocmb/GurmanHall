@@ -18,9 +18,9 @@ class LogMiddleware:
 
     def __call__(self, request):
         current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        user_name = request.META.get('USERNAME') if request.META.get('USERNAME') else 'Anonymous'
-        session_key = request.session.session_key if request.session.session_key else 'Anonymous'
-        logger.info(f'{current_time} - {user_name} - {session_key} - {request.path}')
-
+        user_name = request.user.username if request.user.username else 'Anonymous'
+        user_ip = request.META.get('HTTP_X_FORWARDED_FOR') if request.META.get('HTTP_X_FORWARDED_FOR')\
+            else request.META.get('REMOTE_ADDR')
+        logger.info(f'{current_time} - {user_name}|{user_ip} - {request.path}')
         response = self.get_response(request)
         return response
