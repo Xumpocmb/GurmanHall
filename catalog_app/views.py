@@ -3,7 +3,9 @@ from django.shortcuts import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib import messages
 from django.http import JsonResponse
+from django.utils.html import escape
 from catalog_app.models import Category, Product
+import urllib.parse
 
 
 def catalog(request, slug=None):
@@ -35,16 +37,26 @@ def product(request, slug):
 
 
 def add_to_basket(request, slug):
-    current_page = request.META.get('HTTP_REFERER')
-    item = Product.objects.get(slug=slug)
-    count = request.GET.get('count')
-    if item.category.slug == 'zapechennyee-rolly':
-        souce = request.GET.get('souse-option')
-    else:
-        souce = 'Без соуса'
-    print(f'Продукт: {item.name} | Количество {count} | Соус для шапочки запеченных роллов: {souce if souce else "Шапочки нет"}')
-    messages.success(request, 'Товар добавлен!')
-    return HttpResponseRedirect(current_page)
+    # current_page = request.META.get('HTTP_REFERER')
+
+    # count = request.GET.get('count')
+    # if item.category.slug == 'zapechennyee-rolly':
+    #     souce = request.GET.get('souse-option')
+    # else:
+    #     souce = 'Без соуса'
+    # print(f'Продукт: {item.name} | Количество {count} | Соус для шапочки запеченных роллов: {souce if souce else "Шапочки нет"}')
+    # messages.success(request, 'Товар добавлен!')
+    # return HttpResponseRedirect(current_page)
+    if request.method == 'POST':
+        item = Product.objects.get(slug=slug)
+        form_data = request.POST.get('form')
+        decoded_data = urllib.parse.unquote(form_data)
+        form_dict = dict(item.split('=') for item in decoded_data.split('&'))
+        count = int(form_dict.get('count'))
+        souse_option = escape(form_dict.get('souse-option'))
+        print(item.name, count, souse_option)
+        return JsonResponse({'success': True})
+    return JsonResponse({'success': False})
 
 
 def not_found(request):
