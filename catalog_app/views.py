@@ -42,7 +42,7 @@ def add_to_basket(request, slug):
         souce = request.GET.get('souse-option')
     else:
         souce = 'Без соуса'
-    print(f'Продукт: {item.name} | Количество {count} | Соус для запеченных роллов: {souce}')
+    print(f'Продукт: {item.name} | Количество {count} | Соус для шапочки запеченных роллов: {souce if souce else "Шапочки нет"}')
     messages.success(request, 'Товар добавлен!')
     return HttpResponseRedirect(current_page)
 
