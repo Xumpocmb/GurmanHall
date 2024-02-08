@@ -44,47 +44,49 @@
         <!-- КОНЕЦ ВЕРХНЕГО МЕНЮ-->
         <!-- ХЕДЕР -->
         <div class="header__logo-drop">
-            <div class="header__logo-title">
-                <div class="header__logo">
-                    <a href="{% url 'shop_app:index' %}"><img src="{% static 'img/logo_002.png' %}" alt="logo"></a>
-                </div>
-                <div class="header__nav-title">
-                    <h1 class="header__title">Готовим изысканные роллы!</h1>
-                </div>
-                <div class="header__btn-block">
-                    <!-- кнопка вход -->
-                    <a class="btn btn-success" href="#" role="button">Вход</a>
-                    <!-- начало кнопки корзина -->
-                    <a class="btn btn-success header__link-basket" href="#" role="button">
-                        <div class="header__basket">
-                            <img src="{% static 'img/basket2.png' %}" alt="basket">
-                        </div>
-                        Корзина
-                    </a>
-                    <!-- конец кнопки корзина -->
-                    <div class="dropdown">
-                        <!-- начало кнопки профиль -->
-                        <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                            Профиль
-                        </button>
-                        <!-- конец кнопки профиль -->
-                        <!-- выпадающий список -->
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Мои Заказы</a></li>
-                            <li><a class="dropdown-item" href="{% url 'admin:index' %}" target="_blank">Админ-панель</a></li>
-                            <li><a class="dropdown-item" href="#">Заказы</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Выход</a></li>
-                        </ul>
-                    </div>
-                </div>
+        <div class="header__logo-title">
+          <div class="header__logo">
+            <a href="{% url 'shop_app:index' %}"><img src="{% static 'img/logo_002.png' %}" alt="logo"></a>
+          </div>
+          <div class="header__nav-title">
+            <h1 class="header__title">Готовим изысканные роллы!</h1>
+            <div class="collapse" id="navbarToggleExternalContent">
+              <div class="bg-dark p-4">
+                <h5 class="text-white h4">Collapsed content</h5>
+                <span class="text-muted">Toggleable via the navbar brand.</span>
+              </div>
             </div>
+          </div>
+          <div class="header__btn-block header__btn-menu">
+            <a class="btn btn-success" href="#" role="button">Вход</a>
+            <a class="btn btn-success header__link-basket" href="#" role="button">
+              <div class="header__basket">
+                <img src="{% static 'img/basket2.png' %}" alt="basket">
+              </div>
+              Корзина
+            </a>
+            <div class="dropdown">
+              <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Профиль
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Заказы</a></li>
+                <li><a class="dropdown-item" href="{% url 'admin:index' %}">Админ панель</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Выход</a></li>
+              </ul>
+            </div>
+          </div>
         </div>
+      </div>
         <!-- КОНЕЦ ХЕДЕРА-->
     </header>
+
+    {% include 'notifications.html' %}
+
     {% block content %}
         
     {% endblock %}
@@ -199,6 +201,8 @@
         integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
         crossorigin="anonymous"></script>
 <script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/jquery/jquery-3.7.0.min.js' %}"></script>
+<script src="{% static 'js/jquery-ajax.js' %}"></script>
 <!-- КОНЕЦ СКРИПТОВ -->
 </body>
 <!-- КОНЕЦ СТРАНИЦЫ -->

@@ -62,7 +62,7 @@
                 {% for category in categories %}
                     <div class="col justify-content-center">
                         <!-- начало ссылки меню раздела -->
-                        <a class="filter-menu__link" href="#">
+                        <a class="filter-menu__link" href="{% url 'catalog_app:catalog' category.slug %}">
                             <div class="filter-menu__img-block">
                                 <img class="filter-menu__img" src="{% if category.image %}{{ category.image.url }}{% else %}{% static 'img/not_found.png' %}{% endif %}"
                                      alt="rolls-card">

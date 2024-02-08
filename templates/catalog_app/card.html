@@ -8,12 +8,9 @@
             <div class="big-card__main-container">
                 <div class="big-card__card-block">
                     <div class="big-card__img-block">
-                        <img src="
-                                
-                                
-                                
-                                {% if product.image %}{{ product.image.url }}{% else %}{% static 'img/not_found.png' %}{% endif %}"
-                             class="big-card__img" alt="{{ product.name }}">
+                        <img src="{% if product.image %}{{ product.image.url }}
+                                    {% else %}{% static 'img/not_found.png' %}
+                                    {% endif %}" class="big-card__img" alt="{{ product.name }}">
                     </div>
                     <div class="big-card__text-block">
                         <h2 class="big-card__title">{{ product.name }}</h2>

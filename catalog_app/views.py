@@ -1,6 +1,7 @@
 from django.core.paginator import Paginator
 from django.shortcuts import HttpResponseRedirect
 from django.shortcuts import render
+from django.contrib import messages
 
 from catalog_app.models import Category, Product
 
@@ -42,6 +43,7 @@ def add_to_basket(request, slug):
     else:
         souce = 'Без соуса'
     print(f'Продукт: {item.name} | Количество {count} | Соус для запеченных роллов: {souce}')
+    messages.success(request, 'Товар добавлен!')
     return HttpResponseRedirect(current_page)
 
 
