@@ -34,10 +34,9 @@
                               method="get">
                             <div class="big-card__quantity-controller">
                                 Количество порций для заказа:
-                                <a class="big-card__dark big-card__max">-</a>
-                                {#                                <span class="big-card__number" id="count">1</span>#}
-                                <input type="text" class="big-card__number" value="1" name="count">
-                                <a class="big-card__green big-card__max">+</a>
+                                <a id="big-card__dark" class="big-card__dark big-card__max">-</a>
+                                <input id="counter_value" type="text" class="big-card__number" value="1" name="count">
+                                <a id="big-card__green" class="big-card__green big-card__max">+</a>
                             </div>
                             {% if product.category.slug == 'zapechennyee-rolly' %}
                                 <p class="big-card__souce-text">Шапочку запеченных роллов можно полить соусом:</p>

@@ -2,7 +2,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib import messages
-
+from django.http import JsonResponse
 from catalog_app.models import Category, Product
 
 

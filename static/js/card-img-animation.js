@@ -16,30 +16,30 @@
 // });
 
 //счетчик
-const incrementButton = document.querySelector(
-  ".big-card__green.big-card__max"
-);
-const decrementButton = document.querySelector(".big-card__dark.big-card__max");
-const counterDisplay = document.querySelector(".big-card__number");
-
-let counterValue = parseInt(counterDisplay.value, 10);
-
-function incrementCounter() {
-  if (counterValue < 25) {
-    counterValue++;
-    counterDisplay.value = counterValue;
-  }
-}
-
-function decrementCounter() {
-  if (counterValue > 1) {
-    counterValue--;
-    counterDisplay.value = counterValue;
-  }
-}
-
-incrementButton.addEventListener("click", incrementCounter);
-decrementButton.addEventListener("click", decrementCounter);
+// const incrementButton = document.querySelector(
+//   ".big-card__green.big-card__max"
+// );
+// const decrementButton = document.querySelector(".big-card__dark.big-card__max");
+// const counterDisplay = document.querySelector(".big-card__number");
+//
+// let counterValue = parseInt(counterDisplay.value, 10);
+//
+// function incrementCounter() {
+//   if (counterValue < 25) {
+//     counterValue++;
+//     counterDisplay.value = counterValue;
+//   }
+// }
+//
+// function decrementCounter() {
+//   if (counterValue > 1) {
+//     counterValue--;
+//     counterDisplay.value = counterValue;
+//   }
+// }
+//
+// incrementButton.addEventListener("click", incrementCounter);
+// decrementButton.addEventListener("click", decrementCounter);
 
 document.querySelectorAll(".big-card__card-block").forEach(function (card) {
   card.addEventListener("mousemove", function (e) {
