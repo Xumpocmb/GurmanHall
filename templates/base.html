@@ -58,7 +58,7 @@
             </div>
           </div>
           <div class="header__btn-block header__btn-menu">
-            <a class="btn btn-success" href="#" role="button">Вход</a>
+            <a class="btn btn-success" href="{% url 'user_app:login' %}" role="button">Вход</a>
             <a class="btn btn-success header__link-basket" href="#" role="button">
               <div class="header__basket">
                 <img src="{% static 'img/basket2.png' %}" alt="basket">
@@ -72,11 +72,11 @@
               </button>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="#">Заказы</a></li>
-                <li><a class="dropdown-item" href="{% url 'admin:index' %}">Админ панель</a></li>
+                <li><a class="dropdown-item" href="{% url 'admin:index' %}" target="_blank">Админ панель</a></li>
                 <li>
                   <hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item" href="#">Выход</a></li>
+                <li><a class="dropdown-item" href="{% url 'user_app:logout' %}">Выход</a></li>
               </ul>
             </div>
           </div>
