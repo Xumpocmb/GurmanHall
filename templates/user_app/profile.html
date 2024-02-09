@@ -1,12 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-{% include 'notifications.html' %}
-<h1>Профиль</h1>
-<p>{{ request.user.username }}</p>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <main class="main">
+        <section class="register">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div class="register__card shadow-lg border-0 rounded-lg mt-5">
+                        <div class="card-header">
+                            <h3 class="text-center font-weight-light my-4">Профиль</h3>
+                            <h1>СТРАНИЦА В РАЗРАБОТКЕ</h1>
+                            <p>Имя пользователя: {{ request.user.username }}</p>
+                            <p>Почта: {{ request.user.email }} | {% if request.user.verified_email %} Подтвержденная почта {% else %} Не подтвержденная почта {% endif %}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+{% endblock %}
