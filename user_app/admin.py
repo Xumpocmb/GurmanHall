@@ -1,3 +1,9 @@
 from django.contrib import admin
+from user_app.models import User
 
-# Register your models here.
+
+@admin.register(User)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ['username', 'email']
+    search_fields = ['name', 'username', 'email']
+
