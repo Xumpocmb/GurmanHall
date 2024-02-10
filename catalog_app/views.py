@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.shortcuts import HttpResponseRedirect
 from django.shortcuts import render
@@ -36,27 +37,18 @@ def product(request, slug):
     return render(request, 'catalog_app/card.html', context=context)
 
 
+@login_required(login_url='user_app:login')
 def add_to_basket(request, slug):
-    # current_page = request.META.get('HTTP_REFERER')
-
-    # count = request.GET.get('count')
-    # if item.category.slug == 'zapechennyee-rolly':
-    #     souce = request.GET.get('souse-option')
-    # else:
-    #     souce = 'Без соуса'
-    # print(f'Продукт: {item.name} | Количество {count} | Соус для шапочки запеченных роллов: {souce if souce else "Шапочки нет"}')
-    # messages.success(request, 'Товар добавлен!')
-    # return HttpResponseRedirect(current_page)
-    if request.method == 'POST':
-        item = Product.objects.get(slug=slug)
-        form_data = request.POST.get('form')
-        decoded_data = urllib.parse.unquote(form_data)
-        form_dict = dict(item.split('=') for item in decoded_data.split('&'))
-        count = escape(int(form_dict.get('count')))
-        souse_option = escape(form_dict.get('souse-option'))
-        print(item.name, count, souse_option)
-        return JsonResponse({'success': True})
-    return JsonResponse({'success': False})
+    current_page = request.META.get('HTTP_REFERER')
+    item = Product.objects.get(slug=slug)
+    count = request.GET.get('count')
+    if item.category.slug == 'zapechennyee-rolly':
+        sauce = request.GET.get('souse-option')
+    else:
+        sauce = 'Без соуса'
+    print(f'Продукт: {item.name} | Количество {count} | Соус для шапочки запеченных роллов: {sauce if sauce else "Шапочки нет"}')
+    messages.success(request, 'Товар добавлен!')
+    return HttpResponseRedirect(current_page)
 
 
 def not_found(request):

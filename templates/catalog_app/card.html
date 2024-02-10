@@ -4,7 +4,6 @@
 {% block content %}
     <main class="main">
         <section class="big-card">
-        {% include 'notifications.html' %}
             <!-- начало карточки товара -->
             <div class="row big-card__main-container">
                 <div class="big-card__card-block">
@@ -75,13 +74,5 @@
             <!-- конец карточки товара -->
         </section>
     </main>
-{% endblock %}
-
-{% block scripts %}
-	<script src="{% static 'js/jquery/jquery-3.7.0.min.js' %}"></script>
-    <script src="{% static 'js/notifications.js' %}"></script>
-    <script src="{% static 'js/card-counter.js' %}"></script>
-    <script src="{% static 'js/card-img-animation.js' %}"></script>
-    <script src="{% static 'js/basket.js' %}"></script>
 {% endblock %}
 
