@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from user_app.forms import UserLoginForm, UserRegistrationForm
+from user_app.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 
 
 def register(request):
@@ -59,4 +59,13 @@ def profile(request):
     context = {
         'title': f'{username} -Профиль пользователя',
     }
+    if request.method == 'POST':
+        form = UserProfileForm(data=request.POST, instance=request.user, files=request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Ваш профиль успешно обновлен!')
+            return HttpResponseRedirect(reverse('users_app:profile'))
+    else:
+        form = UserProfileForm(instance=request.user)
+    context['form'] = form
     return render(request, 'user_app/profile.html', context=context)

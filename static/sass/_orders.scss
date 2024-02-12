@@ -1,0 +1,18 @@
+.table td,
+.table th {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+}
+
+.table-success tbody + tbody,
+.table-success td,
+.table-success th,
+.table-success thead th {
+  border-color: #8fd19e;
+}
+
+.orders {
+  font-size: 1.5rem;
+  padding: 0 10px;
+}

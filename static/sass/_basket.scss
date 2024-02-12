@@ -1,0 +1,52 @@
+.badge-secondary {
+  color: #fff;
+  background-color: #6c757d;
+}
+
+.badge-pill {
+  padding-right: 0.6em;
+  padding-left: 0.6em;
+  border-radius: 10rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25em 0.4em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.fa-trash:before {
+  content: "\f1f8";
+  font-family: "Font Awesome 5 Free";
+}
+
+.basket-row {
+  gap: 0;
+}
+
+.basket__order {
+  font-size: 1.5rem;
+}
+
+.basket__order-wrapper {
+  width: 80%;
+  padding: 0 15px;
+}
+
+.basket__sum {
+  font-size: 2rem;
+}
+
+@media (max-width: 991px) {
+  .basket-row {
+    gap: 20px;
+  }
+}

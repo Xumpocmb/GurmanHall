@@ -1,0 +1,17 @@
+.error__main {
+  @include font($size: 20rem, $weight: 700, $height: normal);
+  text-align: center;
+  @extend %font-prompt;
+}
+
+.error__text {
+  @include font($size: 1.6rem, $weight: 400, $height: normal);
+  text-align: center;
+  @extend %font-prompt;
+}
+
+@media (max-width: 586px) {
+  .error__main {
+    @include font($size: 15rem, $weight: 700, $height: normal);
+  }
+}
