@@ -5,7 +5,8 @@ from django.shortcuts import render
 from django.contrib import messages
 from django.http import JsonResponse
 from django.utils.html import escape
-from catalog_app.models import Category, Product, Basket
+from catalog_app.models import Category, Product
+from carts_app.models import Basket
 import urllib.parse
 
 
@@ -37,28 +38,7 @@ def product(request, slug):
     return render(request, 'catalog_app/card.html', context=context)
 
 
-@login_required(login_url='user_app:login')
-def add_to_basket(request, slug):
-    item = Product.objects.get(slug=slug)
-    baskets = Basket.objects.filter(user=request.user, product=item)
-    if not baskets.exists():
-        Basket.objects.create(user=request.user, product=item, quantity=1)
-    else:
-        basket = baskets.first()
-        basket.quantity += 1
-        if item.category.slug == 'zapechennyee-rolly':
-            basket.sauce = request.GET.get('souse-option')
-        else:
-            basket.sauce = 'Без соуса'
-        basket.save()
-    messages.success(request, 'Товар добавлен!')
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-
-def remove_from_basket(request, basket_id):
-    basket = Basket.objects.get(id=basket_id)
-    basket.delete()
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 def not_found(request):

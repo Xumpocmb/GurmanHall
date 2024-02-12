@@ -1,8 +1,8 @@
 {% load static %}
 
 {% if messages %}
-    <div class="alert{% if messages.success %} alert-success {% else %} alert-warning {% endif %}
-                            alert-dismissible fade show" role="alert" id="notification" style="margin-top: 50px; text-align: center">
-            {% for message in messages %} {{ message }} {% endfor %}
+    <div class="alert{% if messages %} alert-success {% else %} alert-warning {% endif %}
+    alert-dismissible fade show" id="notification" style="margin-top: 50px; text-align: center">
+        {% for message in messages %} {{ message }} {% endfor %}
     </div>
 {% endif %}

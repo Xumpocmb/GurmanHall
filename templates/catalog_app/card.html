@@ -30,7 +30,7 @@
                                 {% if product.weight %}{{ product.weight }} гр.{% endif %}</p>
                         </div>
 
-                        <form class="big-card__form" action="{% url 'catalog_app:add_to_basket' product.slug %}"
+                        <form class="big-card__form" action="{% url 'carts_app:add_to_carts' product.slug %}"
                               method="get">
                         {% csrf_token %}
                             <div class="big-card__quantity-controller">

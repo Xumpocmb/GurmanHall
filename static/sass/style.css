@@ -985,8 +985,8 @@ h5 {
   }
 }
 .badge-secondary {
-  color: #fff;
-  background-color: #6c757d;
+  color: #079c5a;
+  background-color: #fff;
 }
 
 .badge-pill {
@@ -1015,6 +1015,7 @@ h5 {
 
 .basket-row {
   gap: 0;
+  padding: 5px;
 }
 
 .basket__order {

@@ -8,6 +8,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link type="image/x-icon" rel="shortcut icon" href="{% static '/img/sushi-roll.png' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
         <link rel="stylesheet" href="{% static 'sass/bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static 'sass/normalize.css' %}">
         <link rel="stylesheet" href="{% static 'sass/style.css' %}">
@@ -62,11 +63,14 @@
                         <a class="btn btn-success" href="{% url 'user_app:login' %}" role="button">Вход</a>
                     {% endif %}
                     {% if request.user.is_authenticated %}
-                        <a class="btn btn-success header__link-basket" href="#" role="button">
+                        <a class="btn btn-success header__link-basket" href="{% url 'carts_app:user_carts' %}" role="button">
                             <div class="header__basket">
                                 <img src="{% static 'img/basket2.png' %}" alt="basket">
                             </div>
-                            Корзина
+                                {% if user_carts.total_quantity %}
+                                    <span class="badge badge-secondary badge-pill">
+                                    {{ user_carts.total_quantity }} шт.</span> |
+                                {% endif %} {{ user_carts.total_sum }} руб.
                         </a>
                         <div class="dropdown">
                             <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown"
@@ -74,6 +78,7 @@
                                 Профиль
                             </button>
                             <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{% url 'user_app:profile' %}">Личный кабинет</a></li>
                                 {% if user.is_staff %}
                                     <li><a class="dropdown-item" href="{% url 'admin:index' %}" target="_blank">Админ-панель</a>
                                     </li>
