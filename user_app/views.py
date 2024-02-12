@@ -29,7 +29,6 @@ def login(request):
         'title': 'Гурман Хол - Авторизация',
     }
     if request.method == 'POST':
-        print('request.POST')
         form = UserLoginForm(data=request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
@@ -39,7 +38,7 @@ def login(request):
                 auth.login(request, user)
                 return HttpResponseRedirect(reverse('user_app:profile'))
         else:
-            messages.error(request, 'Неправильные имя или пароль')
+            messages.error(request, 'Неправильные имя или пароль', extra_tags='danger')
     else:
         form = UserLoginForm()
     context['form'] = form
@@ -63,8 +62,10 @@ def profile(request):
         form = UserProfileForm(data=request.POST, instance=request.user, files=request.FILES)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Ваш профиль успешно обновлен!')
-            return HttpResponseRedirect(reverse('users_app:profile'))
+            messages.success(request, 'Ваш профиль успешно обновлен!', extra_tags='success')
+            return HttpResponseRedirect(reverse('user_app:profile'))
+        else:
+            messages.error(request, 'При обновлении профиля произошла ошибка!', extra_tags='danger')
     else:
         form = UserProfileForm(instance=request.user)
     context['form'] = form

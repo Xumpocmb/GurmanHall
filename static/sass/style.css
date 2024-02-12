@@ -911,6 +911,10 @@ h5 {
   font-family: "Prompt", sans-serif;
 }
 
+.input-img {
+  padding: 0 5px !important;
+}
+
 .register__link {
   color: #32373d;
   text-decoration: none;
