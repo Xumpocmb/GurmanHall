@@ -1,6 +1,10 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
-from user_app.models import User
+from user_app.models import User, EmailVerification
+import uuid
+from datetime import timedelta
+from django.utils.timezone import now
+from django.core.exceptions import ValidationError
 
 
 class UserLoginForm(AuthenticationForm):
@@ -23,6 +27,15 @@ class UserRegistrationForm(UserCreationForm):
     email = forms.EmailField()
     password1 = forms.CharField()
     password2 = forms.CharField()
+
+    def save(self, commit=True):
+        user = super(UserRegistrationForm, self).save(commit=False)
+        expiration = now() + timedelta(hours=48)
+        record = EmailVerification.objects.create(user=user, code=uuid.uuid4(), expired=expiration)
+        record.send_verification_email()
+        if commit:
+            user.save()
+        return user
 
 
 class UserProfileForm(UserChangeForm):

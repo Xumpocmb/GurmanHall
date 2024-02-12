@@ -1,3 +1,6 @@
+from time import timezone
+from django.conf import settings
+from django.core.mail import send_mail
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -22,3 +25,27 @@ class User(AbstractUser):
 
     def display_id(self):
         return f'ID: {self.id:05}'
+
+
+class EmailVerification(models.Model):
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    code = models.UUIDField(unique=True, verbose_name='Код подтверждения', null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Создан', null=True, blank=True)
+    expired = models.DateTimeField(verbose_name='Действует до', null=True, blank=True)
+
+    class Meta:
+        db_table = 'email_verifications'
+        verbose_name = 'Подтверждение почты'
+        verbose_name_plural = 'Подтверждения почты'
+        ordering = ['created']
+
+    def __str__(self):
+        return f'Код подтверждения для {self.user.email}'
+
+    def send_verification_email(self):
+        send_mail(
+            subject='GurmanHall - Регистрация на сайте ',
+            message=f'Код подтверждения: {self.code}',
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[self.user.email],
+        )
