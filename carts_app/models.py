@@ -36,8 +36,9 @@ class Basket(models.Model):
         items = {
             'product_name': self.product.name,
             'price': float(self.product.price),
+            'sum': float(self.sum()),
             'quantity': self.quantity,
-            'sauce': self.sauce or 'Без соуса',
-            'description': self.description or 'Без комментария',
+            'sauce': self.sauce or '',
+            'description': self.description or '',
         }
         return items

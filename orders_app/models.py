@@ -10,6 +10,8 @@ class Order(models.Model):
     READY = 3
     ON_WAY = 4
     DELIVERED = 5
+    CANCELLED = 6
+
     STATUSES = (
         (CREATED, 'Создан'),
         (CONFIRMED, 'Подтвержден'),
@@ -17,6 +19,7 @@ class Order(models.Model):
         (READY, 'Готов'),
         (ON_WAY, 'В пути'),
         (DELIVERED, 'Выдан'),
+        (CANCELLED, 'Отменен'),
     )
 
     first_name = models.CharField(max_length=255, null=False, blank=False)

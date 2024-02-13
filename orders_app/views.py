@@ -7,12 +7,21 @@ from django.contrib import messages
 from django.urls import reverse
 
 
-def order(request):
-    return render(request, 'orders_app/order.html')
+def order(request, order_id):
+    show_order = Order.objects.get(id=order_id)
+    context = {
+        'title': 'Заказ',
+        'order': show_order,
+    }
+    return render(request, 'orders_app/order.html', context=context)
 
 
 def orders(request):
-    return render(request, 'orders_app/orders.html')
+    context = {
+        'title': 'Мои заказы',
+        'orders': Order.objects.filter(customer__username=request.user),
+    }
+    return render(request, 'orders_app/orders.html', context=context)
 
 
 def order_create(request):
