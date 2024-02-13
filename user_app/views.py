@@ -4,8 +4,9 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from user_app.models import User, EmailVerification
+
 from user_app.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
+from user_app.models import User, EmailVerification
 
 
 def register(request):
@@ -81,12 +82,11 @@ def email_verification(request, email, code):
     }
     user = User.objects.get(email=email)
     user_email_verification = EmailVerification.objects.filter(user=user, code=code)
-    print(user.email)
     if user_email_verification.exists():
         user.verified_email = True
         user.save()
         messages.success(request, 'Ваша почта успешно подтверждена!', extra_tags='success')
-        return HttpResponseRedirect(reverse('user_app:login'))
+        return render(request, 'user_app/email_verification.html', context=context)
     else:
         messages.error(request, 'Код подтверждения некорректен!', extra_tags='danger')
     return HttpResponseRedirect(reverse('user_app:login'))

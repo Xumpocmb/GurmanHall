@@ -17,21 +17,17 @@ def add_to_carts(request, slug):
     if quantity_from_page:
         quantity_from_page = int(quantity_from_page)
     else:
-        messages.error(request, 'Ошибка: Необходимо ввести хотя бы одну цифру!')
+        messages.error(request, 'Ошибка: Необходимо ввести хотя бы одну цифру!', extra_tags='danger')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     sauce_from_page = request.GET.get('souse-option', None)
 
     if item.category.slug == 'zapechennyee-rolly':
         baskets = Basket.objects.filter(user=request.user, product=item, sauce=sauce_from_page)
         if not baskets.exists():
-            print('ветка: запеченные роллы. корзина не найдена. Создаем новую корзину с соусом.')
             Basket.objects.create(user=request.user, product=item, quantity=quantity_from_page, sauce=sauce_from_page)
         else:
-            print('ветка: найдена корзина. Меняем количество')
             basket = baskets.first()
-            print(f'корзина найдена: {basket.product.name}, {basket.quantity}, {basket.sauce}')
             basket.quantity += quantity_from_page
-            print(f'изменили количество: {basket.quantity}')
             basket.save()
     else:
 
@@ -43,7 +39,7 @@ def add_to_carts(request, slug):
             basket.quantity += quantity_from_page
             basket.sauce = 'Без соуса'
             basket.save()
-    messages.success(request, 'Товар добавлен!')
+    messages.success(request, 'Товар добавлен!', extra_tags='success')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
