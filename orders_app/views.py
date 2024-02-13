@@ -35,8 +35,7 @@ def order_create(request):
         form.instance.customer = User.objects.get(username=request.user)
 
         if form.is_valid():
-            user = form.instance.customer
-            if user.phone and user.address:
+            if form.instance.phone and form.instance.address:
                 user_order = form.save()
                 user_order.fill_basket_history()
                 messages.success(request, 'Заказ оформлен', extra_tags='success')

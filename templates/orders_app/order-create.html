@@ -15,7 +15,7 @@
                             {% csrf_token %}
                                 <div class="g-3">
                                     <div class="col-sm-6">
-                                        <label for="firstName" class="form-label">Имя</label>
+                                        <label for="firstName" class="small mb-1">Имя</label>
                                         <input type="text" class="form-control" id="firstName" name="first_name"
                                                placeholder="Введите имя" value="{{ user.first_name | default_if_none:'' }}" required>
                                         {% if form.first_name.errors %}
@@ -27,7 +27,7 @@
                                     </div>
 
                                     <div class="col-sm-6">
-                                        <label for="lastName" class="form-label">Фамилия</label>
+                                        <label for="lastName" class="small mb-1">Фамилия</label>
                                         <input type="text" class="form-control" id="lastName" name="last_name"
                                                placeholder="Введите фамилию" value="{{ user.last_name | default_if_none:'' }}" required>
                                         {% if form.last_name.errors %}
@@ -38,8 +38,8 @@
                                         {% endif %}
                                     </div>
 
-                                    <div class="col-12 mt-3">
-                                        <label for="email" class="form-label">Адрес электронной почты</label>
+                                    <div class="col-sm-6">
+                                        <label for="email" class="small mb-1">Адрес электронной почты</label>
                                         <input type="email" class="form-control" id="email" name="email"
                                                placeholder="Введите адрес электронной почты"
                                                value="{{ user.email | default_if_none:'' }}" required>
@@ -52,7 +52,7 @@
                                     </div>
 
                                     <div class="col-12 mt-3">
-                                        <label for="address" class="form-label">Адрес</label>
+                                        <label for="address" class="small mb-1">Адрес</label>
                                         <input type="text" class="form-control" id="address" name="address"
                                                placeholder="Введите адрес" value="{{ user.address | default_if_none:'' }}"
                                                required>
@@ -63,7 +63,7 @@
                                             </div>
                                         {% endif %}
                                     </div>
-                                    <div class="col-12 mt-3">
+                                    <div class="col-sm-6">
                                         <label class="small mb-1" for="inputTel">Телефон</label>
                                         <input class="form-control" id="inputTel" name="phone" type="tel"
                                                placeholder="Введите телефон" value="{{ user.phone | default_if_none:'' }}">
