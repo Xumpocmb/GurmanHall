@@ -31,3 +31,13 @@ class Basket(models.Model):
 
     def sum(self):
         return round(self.product.sell_price() * self.quantity, 2)
+
+    def de_json(self):
+        items = {
+            'product_name': self.product.name,
+            'price': float(self.product.price),
+            'quantity': self.quantity,
+            'sauce': self.sauce or 'Без соуса',
+            'description': self.description or 'Без комментария',
+        }
+        return items

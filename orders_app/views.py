@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from orders_app.models import Order
 from user_app.models import User
 from django.contrib import messages
+from django.urls import reverse
 
 
 def order(request):
@@ -25,15 +26,15 @@ def order_create(request):
         form.instance.customer = User.objects.get(username=request.user)
 
         if form.is_valid():
-            print('форма валидна')
-            form.save()
-            messages.success(request, 'Заказ оформлен', extra_tags='success')
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            user = form.instance.customer
+            if user.phone and user.address:
+                user_order = form.save()
+                user_order.fill_basket_history()
+                messages.success(request, 'Заказ оформлен', extra_tags='success')
+                return HttpResponseRedirect(reverse('orders_app:orders'))
+            else:
+                messages.error(request, 'Укажите ваш телефон и адрес для оформления заказа!',
+                               extra_tags='danger')
         else:
-            print('форма не валидна')
-            print(form.errors)
             messages.error(request, 'Ошибка при оформлении заказа!', extra_tags='danger')
-        # if form.is_valid():
-        #     form.save()
-        #     messages.success(request, 'Заказ оформлен', extra_tags='success')
     return render(request, 'orders_app/order-create.html', context=context)

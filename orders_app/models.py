@@ -1,5 +1,6 @@
 from django.db import models
 from user_app.models import User
+from carts_app.models import Basket
 
 
 class Order(models.Model):
@@ -34,7 +35,20 @@ class Order(models.Model):
     class Meta:
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
+        ordering = ['-created_at']
 
     def __str__(self):
-        return f'Заказ № {self.id} от {self.created_at}, статус: {self.get_status_display()}'
+        formatted_date = self.created_at.strftime('%d-%m-%Y %H:%M')
+        return f'Заказ № {self.id} от {formatted_date}, статус: {self.get_status_display()}'
+
+    def fill_basket_history(self):
+        baskets = Basket.objects.filter(user=self.customer)
+        total_sum = float(baskets.total_sum())
+        basket_history = {
+            'baskets': [basket.de_json() for basket in baskets],
+            'total_sum': total_sum
+        }
+        self.basket_history = basket_history
+        baskets.delete()
+        self.save()
 
