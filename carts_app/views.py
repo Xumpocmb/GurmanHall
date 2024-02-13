@@ -54,3 +54,18 @@ def user_carts(request):
         'title': 'Корзина'
     }
     return render(request, 'carts_app/cart.html', context=context)
+
+
+def click_on_plus(request, cart_id):
+    basket = Basket.objects.get(id=cart_id)
+    basket.quantity += 1
+    basket.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def click_on_minus(request, cart_id):
+    basket = Basket.objects.get(id=cart_id)
+    if basket.quantity > 1:
+        basket.quantity -= 1
+        basket.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
