@@ -3,6 +3,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.urls import reverse
 
 
 class User(AbstractUser):
@@ -43,9 +44,11 @@ class EmailVerification(models.Model):
         return f'Код подтверждения для {self.user.email}'
 
     def send_verification_email(self):
+        link = reverse('user_app:email_verification', kwargs={'email': self.user.email, 'code': self.code})
+        full_link = f'{settings.DOMAIN_NAME}{link}'
         send_mail(
-            subject='GurmanHall - Регистрация на сайте ',
-            message=f'Код подтверждения: {self.code}',
+            subject='ГурманХол - Регистрация на сайте ',
+            message=f'Для подтверждения учетной записи перейдите по ссылке:\n {full_link}',
             from_email=settings.EMAIL_HOST_USER,
             recipient_list=[self.user.email],
         )

@@ -36,7 +36,3 @@ def contacts(request):
         form = ContactMessagesForm()
         context['form'] = form
     return render(request, 'shop_app/contacts.html', context=context)
-
-
-def send_email(name, email, message):
-    pass
