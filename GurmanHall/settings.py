@@ -15,7 +15,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG') == 'True'
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'https://c32c-178-172-182-110.ngrok-free.app', 'c32c-178-172-182-110.ngrok-free.app']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'gurmanhall.by', '5.101.50.32']
 
 INTERNAL_IPS = [
     "127.0.0.1",
@@ -138,17 +138,12 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-# Custom user model
-# AUTH_USER_MODEL = 'users_app.User'
-
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
 AUTH_USER_MODEL = 'user_app.User'
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
