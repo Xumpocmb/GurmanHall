@@ -223,7 +223,11 @@ h5,
   gap: 10px;
 }
 
-
+.basket-price-block {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
 
 .basket-control {
   width: 100px;
