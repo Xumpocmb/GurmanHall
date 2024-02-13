@@ -35,9 +35,6 @@
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="{% url 'shop_app:contacts' %}">Контакты</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#about">О нас</a>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -63,14 +60,18 @@
                         <a class="btn btn-success" href="{% url 'user_app:login' %}" role="button">Вход</a>
                     {% endif %}
                     {% if request.user.is_authenticated %}
-                        <a class="btn btn-success header__link-basket" href="{% url 'carts_app:user_carts' %}" role="button">
+                        <a class="btn btn-success header__link-basket" href="{% url 'carts_app:user_carts' %}"
+                           role="button">
                             <div class="header__basket">
                                 <img src="{% static 'img/basket2.png' %}" alt="basket">
                             </div>
-                                {% if user_carts.total_quantity %}
+                            {% if user_carts.total_quantity %}
+                                <div class="basket-price-block">
                                     <span class="badge badge-secondary badge-pill">
-                                    {{ user_carts.total_quantity }} шт.</span> |
-                                {% endif %} {{ user_carts.total_sum }} руб.
+                                        {{ user_carts.total_quantity }} шт.</span>|
+                                    <span class="basket-price">{{ user_carts.total_sum }} р.</span>
+                                </div>
+                            {% endif %}
                         </a>
                         <div class="dropdown">
                             <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown"
@@ -79,7 +80,7 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="{% url 'user_app:profile' %}">Личный кабинет</a></li>
-                                {% if user.is_staff %}
+                                {% if user.is_superuser or user.is_staff %}
                                     <li><a class="dropdown-item" href="{% url 'admin:index' %}" target="_blank">Админ-панель</a>
                                     </li>
                                     <li><a class="dropdown-item" href="#">Управление заказами</a></li>
