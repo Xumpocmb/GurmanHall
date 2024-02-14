@@ -5,6 +5,8 @@ from orders_app.models import Order
 from user_app.models import User
 from django.contrib import messages
 from django.urls import reverse
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
 
 
 def order(request, order_id):
@@ -39,6 +41,13 @@ def order_create(request):
                 user_order = form.save()
                 user_order.fill_basket_history()
                 messages.success(request, 'Заказ оформлен', extra_tags='success')
+                channel_layer = get_channel_layer()
+                async_to_sync(channel_layer.group_send)(
+                    'orders',
+                    {
+                        'type': 'order_create',
+                        'order_id': user_order.id,
+                    })
                 return HttpResponseRedirect(reverse('orders_app:orders'))
             else:
                 messages.error(request, 'Укажите ваш телефон и адрес для оформления заказа!',

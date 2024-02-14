@@ -48,7 +48,6 @@ def change_status(request, order_id, status):
         {
             'type': 'order_update',
             'order_id': find_order.id,
-            'order_status': find_order.status,
             'order_status_text': find_order.get_status_display(),
             'created_at': timezone.localtime(find_order.created_at).isoformat(),
             'total_sum': find_order.basket_history['total_sum'],

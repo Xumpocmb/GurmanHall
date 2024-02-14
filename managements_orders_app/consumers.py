@@ -1,6 +1,9 @@
 import json
+
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
+from django.utils import timezone
+
 from orders_app.models import Order
 
 
@@ -20,26 +23,25 @@ class OrderConsumer(WebsocketConsumer):
             self.room_group_name, self.channel_name
         )
 
-    # Receive message from WebSocket
-    def receive(self, text_data):
-        text_data_json = json.loads(text_data)
-        order_id = text_data_json['order_id']
-        print('Received data:', order_id)
-        # Отправка данных в группу
-        async_to_sync(self.channel_layer.group_send)(
-            self.room_group_name, {'type': 'order_update', 'order_id': order_id}
-        )
-        print('Sent data to group:', self.room_group_name)
-
-    # Обработка данных от группы
     def order_update(self, event):
-        # Отправка данных обновления клиенту
         self.send(text_data=json.dumps({
+            'event_type': 'order_update',
             'order_id': event['order_id'],
-            'order_status': event['order_status'],
             'order_status_text': event['order_status_text'],
             'created_at': event['created_at'],
             'total_sum': event['total_sum'],
+        }))
+
+    def order_create(self, event):
+        # order_create {'type': 'order_create', 'order_id': 25}
+        order = Order.objects.get(id=event['order_id'])
+
+        self.send(text_data=json.dumps({
+            'event_type': 'order_create',
+            'order_id': event['order_id'],
+            'order_status_text': order.get_status_display(),
+            'created_at': timezone.localtime(order.created_at).isoformat(),
+            'total_sum': order.basket_history['total_sum'],
         }))
 
 
