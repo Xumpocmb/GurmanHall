@@ -16,7 +16,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG') == 'True'
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'gurmanhall.by', '5.101.50.32']
-
+CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1', 'http://localhost',]
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
@@ -24,6 +24,9 @@ INTERNAL_IPS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
+    'channels',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -36,6 +39,7 @@ INSTALLED_APPS = [
     'user_app',
     'carts_app',
     'orders_app',
+    'managements_orders_app',
 ]
 
 MIDDLEWARE = [
@@ -71,7 +75,15 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'GurmanHall.wsgi.application'
-
+ASGI_APPLICATION = 'GurmanHall.asgi.application'
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases

@@ -10,6 +10,7 @@ urlpatterns = [
     path('carts/', include('carts_app.urls', namespace='carts_app')),
     path('user/', include('user_app.urls', namespace='user_app')),
     path('orders/', include('orders_app.urls', namespace='orders_app')),
+    path('managements_orders/', include('managements_orders_app.urls', namespace='managements_orders_app')),
 
 ]
 

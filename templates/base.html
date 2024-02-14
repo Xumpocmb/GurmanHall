@@ -83,7 +83,7 @@
                                 {% if user.is_superuser or user.is_staff %}
                                     <li><a class="dropdown-item" href="{% url 'admin:index' %}" target="_blank">Админ-панель</a>
                                     </li>
-                                    <li><a class="dropdown-item" href="#">Управление заказами</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'managements_orders_app:management' %}">Управление заказами</a></li>
                                     <li><a class="dropdown-item" href="{% url 'orders_app:orders' %}">Мои заказы</a></li>
                                 {% endif %}
                                 <li><a class="dropdown-item" href="#">Заказы</a></li>
@@ -220,8 +220,6 @@
 {% block scripts %}
 	
 {% endblock %}
-
-
 <!-- КОНЕЦ СКРИПТОВ -->
 </body>
 <!-- КОНЕЦ СТРАНИЦЫ -->

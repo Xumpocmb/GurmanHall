@@ -234,10 +234,11 @@ h5,
 }
 
 @media (max-width: 586px) {
-  .header__basket {
+  .basket-price-block {
     display: none;
   }
 }
+
 
 .header__basket img {
   width: 100%;

@@ -7,9 +7,22 @@ from django.urls import reverse
 
 
 class User(AbstractUser):
+    CHEF = 'Шеф'
+    OPERATOR = 'Оператор'
+    COURIER = 'Курьер'
+    USER = 'Пользователь'
+
+    ROLES = (
+        (CHEF, 'Шеф'),
+        (OPERATOR, 'Оператор'),
+        (COURIER, 'Курьер'),
+        (USER, 'Пользователь'),
+    )
+
     image = models.ImageField(upload_to='users_images', verbose_name='Изображение', null=True, blank=True)
     phone = models.CharField(max_length=12, unique=True, verbose_name='Телефон', null=True, blank=True)
     address = models.CharField(max_length=255, verbose_name='Адрес', null=True, blank=True)
+    role = models.CharField(max_length=20, choices=ROLES, default='user', verbose_name='Роль', null=True, blank=True)
     date_joined = models.DateTimeField(auto_now_add=True, verbose_name='Дата регистрации', null=True, blank=True)
     last_login = models.DateTimeField(auto_now=True, verbose_name='Последний вход', null=True, blank=True)
     verified_email = models.BooleanField(default=False, verbose_name='Подтвержденная почта', null=True, blank=True)
