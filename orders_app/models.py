@@ -23,10 +23,11 @@ class Order(models.Model):
     )
 
     first_name = models.CharField(max_length=255, null=False, blank=False)
-    last_name = models.CharField(max_length=255, null=False, blank=False)
-    email = models.EmailField(max_length=254, null=False, blank=False)
+    last_name = models.CharField(max_length=255, null=False, blank=True)
+    email = models.EmailField(max_length=254, null=False, blank=True)
     address = models.CharField(max_length=255, null=False, blank=False)
     phone = models.CharField(max_length=255, null=False, blank=False)
+    description = models.TextField(max_length=1000, null=True, blank=True)
     basket_history = models.JSONField(default=dict)
     customer = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.SmallIntegerField(default=CREATED, choices=STATUSES)
@@ -54,4 +55,3 @@ class Order(models.Model):
         self.basket_history = basket_history
         baskets.delete()
         self.save()
-

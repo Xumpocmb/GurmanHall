@@ -1,114 +1,113 @@
-{% extends 'base.html' %}
 {% load static %}
-{% block content %}
-    <main class="main">
-        <section class="create-order">
-            <div class="row justify-content-center">
-                <div class="col-lg-7">
-                    <div class="register__card shadow-lg border-0 rounded-lg mt-5">
-                        <div class="card-header">
-                            <h3 class="text-center font-weight-light my-4">Оформление заказа</h3>
-                        </div>
-                        <div class="card-body card-body-register">
-                            <h2 class="mb-3">Адрес доставки</h2>
-                            <form action="{% url 'orders_app:order_create' %}" method="post">
-                            {% csrf_token %}
-                                <div class="g-3">
-                                    <div class="col-sm-6">
-                                        <label for="firstName" class="small mb-1">Имя</label>
-                                        <input type="text" class="form-control" id="firstName" name="first_name"
-                                               placeholder="Введите имя" value="{{ user.first_name | default_if_none:'' }}" required>
-                                        {% if form.first_name.errors %}
-                                            <div class="profile-alert alert alert-danger alert-dismissible fade show"
-                                                 role="alert">
-                                                {{ form.first_name.errors }}
-                                            </div>
-                                        {% endif %}
-                                    </div>
 
-                                    <div class="col-sm-6">
-                                        <label for="lastName" class="small mb-1">Фамилия</label>
-                                        <input type="text" class="form-control" id="lastName" name="last_name"
-                                               placeholder="Введите фамилию" value="{{ user.last_name | default_if_none:'' }}" required>
-                                        {% if form.last_name.errors %}
-                                            <div class="profile-alert alert alert-danger alert-dismissible fade show"
-                                                 role="alert">
-                                                {{ form.last_name.errors }}
-                                            </div>
-                                        {% endif %}
-                                    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'operator/style.css' %}">
+    <title>{{ title }}</title>
+</head>
 
-                                    <div class="col-sm-6">
-                                        <label for="email" class="small mb-1">Адрес электронной почты</label>
-                                        <input type="email" class="form-control" id="email" name="email"
-                                               placeholder="Введите адрес электронной почты"
-                                               value="{{ user.email | default_if_none:'' }}" required>
-                                        {% if form.email.errors %}
-                                            <div class="profile-alert alert alert-danger alert-dismissible fade show"
-                                                 role="alert">
-                                                {{ form.email.errors }}
-                                            </div>
-                                        {% endif %}
-                                    </div>
+<style>
 
-                                    <div class="col-12 mt-3">
-                                        <label for="address" class="small mb-1">Адрес</label>
-                                        <input type="text" class="form-control" id="address" name="address"
-                                               placeholder="Введите адрес" value="{{ user.address | default_if_none:'' }}"
-                                               required>
-                                        {% if form.address.errors %}
-                                            <div class="profile-alert alert alert-danger alert-dismissible fade show"
-                                                 role="alert">
-                                                {{ form.address.errors }}
-                                            </div>
-                                        {% endif %}
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label class="small mb-1" for="inputTel">Телефон</label>
-                                        <input class="form-control" id="inputTel" name="phone" type="tel"
-                                               placeholder="Введите телефон" value="{{ user.phone | default_if_none:'' }}">
-                                        {% if form.phone.errors %}
-                                            <div class="profile-alert alert alert-danger alert-dismissible fade show"
-                                                 role="alert">
-                                                {{ form.phone.errors }}
-                                            </div>
-                                        {% endif %}
-                                    </div>
-                                    <div class="col-12 mt-3">
-                                        <p class="big-card__souce-text"><b>Метод оплаты:</b></p>
-                                        <div class="big__card-souce-block">
-                                            <div class="big-card__souse-item">
-                                                <label class="big-card__label">
-                                                    <input type="radio" name="delivery_method" class="radio"
-                                                           value="Самовывоз" checked="checked">
-                                                    <span class="radio-custom"></span>
-                                                    <span class="label">Самовывоз (оплата получении)</span>
-                                                </label>
-                                            </div>
-                                            <div class="big-card__souse-item">
-                                                <label class="big-card__label">
-                                                    <input type="radio" name="delivery_method" class="radio"
-                                                           value="Курьер">
-                                                    <span class="radio-custom"></span>
-                                                    <span class="label">Курьеру наличными/картой</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <hr class="my-4">
-                            <div style="text-align: center; font-size: 12px;">
-                                <span class="label">После оформления заказа с Вами свяжется наш оператор
-                                    для подтверждения заказа. Ожидайте звонок на указанный номер телефона.</span>
-                            </div>
-                                <button class="w-100 btn btn-success btn-lg" type="submit">Заказать</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+</style>
+<body>
+<!-- НАЧАЛО СТРАНИЦЫ -->
+<div class="container">
+    <div class="wrapper">
+        <div class="main-header">
+            <h1>Оформление заказа оператором</h1>
+            {% if messages %}
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="main-table">
+            <div class="left">
+            <h2>Список доступных продуктов:</h2><br>
+                <form id="addToCartLink" action="{% url 'managements_orders_app:order_create' %}" method="get">
+                    {% csrf_token %}
+                    <!-- Список доступных товаров -->
+                    <label for="products">Выберите товары:</label><br>
+                    <select id="products" name="products" required size="10" data-width="100%">
+                        {% for product in products %}
+                            <option value="{{ product.id }}">{{ product.name }} - {{ product.price }} руб.</option>
+                        {% endfor %}
+                    </select><br>
+                    <label for="count">Количество</label>
+                    <input type="number" value="1" id="count" name="count" min="1"><br><br>
+                    <label for="comment">Предпочтения (к примеру, соус к запеченным роллам):</label><br>
+                    <textarea id="comment" name="comment" cols="60" rows="3"></textarea><br><br>
+                    <button type="submit" class="button_add_product">Добавить к заказу</button>
+                </form>
             </div>
-        </section>
-    </main>
-{% endblock %}
-    
+            <div class="right">
+                {% if user_carts %}
+                    <h2>Список заказанных продуктов:</h2><br>
+                    {% for item in user_carts %}
+                        <div>
+                            <p>{{ item.product.name }}</p>
+                            <p class="product-description">{{ item.product.description }}</p>
+                            {% if item.description %}<p>Примечание:{{ item.description }}</p>{% endif %}
+                            <p>
+                                <a href="{% url 'carts_app:click_on_minus' item.id %}" class="count_link">-</a>
+                                {{ item.quantity }}
+                                <a href="{% url 'carts_app:click_on_plus' item.id %}" class="count_link">+</a>
+                            </p>
+                            <p>{{ item.sum }}</p>
+                            <p><a href="{% url 'carts_app:remove_from_carts' item.id %}"><span class="red-danger">Удалить</span></a>
+                            </p>
+                        </div>
+                    {% endfor %}
+                    <hr>
+                    <p>Итого: {{ user_carts.total_sum }} руб.</p>
+                {% else %}
+                    <h3>Корзина пуста</h3>
+                {% endif %}
+            </div>
+        </div>
+        <div class="bottom-table">
+            <form action="{% url 'orders_app:operator_order_create' %}" class="form-make-operator-order" method="post">
+                {% csrf_token %}
+                <!-- Поля для ввода информации о заказе -->
+                <label for="first_name">Имя:</label><br>
+                <input class="input_client_data" type="text" id="first_name" name="first_name"
+                       placeholder="Введите имя клиента" required><br><br>
+
+                <label for="address">Адрес (оставьте по умолчанию если самовывоз):</label><br>
+                <input class="input_client_data" type="text" id="address" name="address"
+                       placeholder="Адрес клиента" value="{{ user.address }}" required><br><br>
+
+                <label for="phone">Телефон:</label><br>
+                <input class="input_client_data" type="tel" id="phone" name="phone" required value="{{ user.phone }}"
+                placeholder="Заполнится автоматически если самовывоз"><br><br>
+                
+                <label for="comment">Комментарий к заказу:</label><br>
+                    <textarea id="comment" name="description" cols="60" rows="3" class="input_client_data"
+                    placeholder="Комментарий для повара либо курьера"></textarea><br><br>
+
+                <label for="delivery_method">Способ доставки:</label><br>
+                <select id="delivery_method" name="delivery_method" required>
+                    <option value="Самовывоз">Самовывоз</option>
+                    <option value="Доставка">Доставка</option>
+                </select><br><br>
+                <button type="submit" class="button_make_order">Сделать заказ</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let productsSelect = document.getElementById('products');
+        let addToCartLink = document.querySelector('#addToCartLink');
+
+        productsSelect.addEventListener('change', function () {
+            let selectedProductId = productsSelect.value;
+            addToCartLink.action = `/carts/operator_add_to_carts/${selectedProductId}/`;
+        });
+    });
+</script>
+</html>

@@ -7,6 +7,10 @@
             <div class="order__wrapper pt-5">
                 <div class="text-center mt-5">
                     <h1>Заказы</h1>
+                <div>
+                    <a href="{% url 'managements_orders_app:order_create' %}" class="btn btn-primary"
+                    target="_blank">Новый заказ</a>
+                </div>
                     <div class="orders mt-5">
                         <table class="table">
                             <thead>
@@ -34,7 +38,7 @@
                                     <td>{{ order.created_at }}</td>
                                     <td>{{ order.basket_history.total_sum }} руб.</td>
                                     <td>
-                                        <a href="{% url 'managements_orders_app:order' order.id %}"
+                                        <a href="{% url 'orders_app:order' order.id %}"
                                            target="_blank">Детали</a>
                                     </td>
                                 </tr>

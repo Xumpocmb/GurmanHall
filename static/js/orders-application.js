@@ -8,6 +8,7 @@ socket.onmessage = function (e) {
     let data = JSON.parse(e.data);
     let eventType = data.event_type;
     console.log(eventType);
+    console.log("sadfasdfasdf");
     if (eventType === 'order_update') {
         let orderId = data.order_id;
         let statusText = data.order_status_text;
@@ -20,8 +21,7 @@ socket.onmessage = function (e) {
             order_tr.className = "table-primary";
         } else if (statusText === "В обработке") {
             order_tr.className = "table-warning";
-        }
-        if (statusText === "Готов") {
+        } else if (statusText === "Готов") {
             order_tr.className = "table-success";
         } else if (statusText === "В пути") {
             order_tr.className = "table-secondary";
@@ -42,6 +42,8 @@ socket.onmessage = function (e) {
     if (eventType === 'order_create') {
         let orderId = data.order_id;
         let statusText = data.order_status_text;
+        console.log(orderId);
+        console.log(statusText);
         let createdAt = new Date(data.created_at);
         let totalSum = data.total_sum;
         let parentElement = document.getElementById("ordersBody");

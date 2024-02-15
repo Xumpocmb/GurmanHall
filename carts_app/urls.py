@@ -1,5 +1,5 @@
 from django.urls import path
-from carts_app.views import add_to_carts, remove_from_carts, user_carts, click_on_plus, click_on_minus
+from carts_app.views import add_to_carts, remove_from_carts, user_carts, click_on_plus, click_on_minus, operator_add_to_carts
 
 app_name = 'carts_app'
 
@@ -9,4 +9,5 @@ urlpatterns = [
     path('remove_from_carts/<int:cart_id>/', remove_from_carts, name='remove_from_carts'),
     path('click_on_plus/<int:cart_id>/', click_on_plus, name='click_on_plus'),
     path('click_on_minus/<int:cart_id>/', click_on_minus, name='click_on_minus'),
+    path('operator_add_to_carts/<int:product_id>/', operator_add_to_carts, name='operator_add_to_carts'),
 ]

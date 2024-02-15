@@ -21,7 +21,7 @@
                             {% for item in order.basket_history.baskets %}
                                 <tr>
                                     <th scope="row">{{ item.product_name }}</th>
-                                    <td><p>{{ item.description }}</p><p>{{ item.sauce }}</p></td>
+                                    <td><p>{{ order.description }} {{ item.sauce }} {{ item.description }}</p></td>
                                     <td>{{ item.quantity }}</td>
                                     <td>{{ item.price }} руб.</td>
                                     <td>{{ item.sum }} руб.</td>

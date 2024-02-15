@@ -30,7 +30,6 @@ def add_to_carts(request, slug):
             basket.quantity += quantity_from_page
             basket.save()
     else:
-
         baskets = Basket.objects.filter(user=request.user, product=item)
         if not baskets.exists():
             Basket.objects.create(user=request.user, product=item, quantity=quantity_from_page)
@@ -40,6 +39,22 @@ def add_to_carts(request, slug):
             basket.sauce = 'Без соуса'
             basket.save()
     messages.success(request, 'Товар добавлен!', extra_tags='success')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+@login_required(login_url='user_app:login')
+def operator_add_to_carts(request, product_id):
+    item = Product.objects.get(id=product_id)
+    quantity_from_page = re.sub(r'\D', '', request.GET.get('count', 1))
+    description = request.GET.get('comment', None)
+    baskets = Basket.objects.filter(user=request.user, product=item)
+    if not baskets.exists():
+        Basket.objects.create(user=request.user, product=item, quantity=quantity_from_page, description=description)
+    else:
+        basket = baskets.first()
+        basket.quantity += quantity_from_page
+        basket.description = description
+        basket.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 

@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
-import user_app.views
+from catalog_app.models import Product
 from orders_app.models import Order
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
@@ -32,17 +32,12 @@ def orders(request):
     return render(request, 'managements_orders_app/orders.html', context=context)
 
 
-def order(request, order_id):
-    context = {
-        'title': 'Заказ #' + str(order_id),
-    }
-    find_order = get_object_or_404(Order, id=order_id)
-    context['order'] = find_order
-    return render(request, 'managements_orders_app/order.html', context=context)
-
-
 def order_create(request):
-    return render(request, 'managements_orders_app/order_create.html')
+    context = {
+        'title': 'Новый заказ',
+        'products': Product.objects.all(),
+    }
+    return render(request, 'managements_orders_app/order_create.html', context=context)
 
 
 def management(request):
