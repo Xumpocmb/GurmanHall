@@ -8,5 +8,5 @@ class OrderAdmin(admin.ModelAdmin):
     fields = ['id', 'status', 'created_at', 'updated_at', 'customer',
               ('first_name', 'last_name', 'email', 'address', 'phone',),
               'delivery_method', 'basket_history']
-
+    list_filter = ['status']
     readonly_fields = ['id', 'created_at', 'updated_at', 'customer', 'basket_history']

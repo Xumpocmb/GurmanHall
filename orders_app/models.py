@@ -42,7 +42,7 @@ class Order(models.Model):
 
     def __str__(self):
         formatted_date = self.created_at.strftime('%d-%m-%Y %H:%M')
-        return f'Заказ № {self.id} от {formatted_date}, статус: {self.get_status_display()}'
+        return f'Заказ № {self.id} | {formatted_date} | {self.customer} | {self.get_status_display()}'
 
     def fill_basket_history(self):
         baskets = Basket.objects.filter(user=self.customer)

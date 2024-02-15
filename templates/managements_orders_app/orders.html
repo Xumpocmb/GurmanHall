@@ -21,20 +21,21 @@
                             <tbody id="ordersBody">
                             {% for order in orders %}
                                 <tr id="order-{{ order.id }}" class="
-                        {% if order.status == order.CREATED %}table-info
-                        {% elif order.status == order.CONFIRMED %}table-primary
-                        {% elif order.status == order.PROCESSING %}table-warning
-                        {% elif order.status == order.READY %}table-success
-                        {% elif order.status == order.ON_WAY %}table-secondary
-                        {% elif order.status == order.DELIVERED %}table-dark
-                        {% elif order.status == order.CANCELLED %}table-danger
-                        {% endif %}">
+                                    {% if order.status == order.CREATED %}table-info
+                                    {% elif order.status == order.CONFIRMED %}table-primary
+                                    {% elif order.status == order.PROCESSING %}table-warning
+                                    {% elif order.status == order.READY %}table-success
+                                    {% elif order.status == order.ON_WAY %}table-secondary
+                                    {% elif order.status == order.DELIVERED %}table-dark
+                                    {% elif order.status == order.CANCELLED %}table-danger
+                                    {% endif %}">
                                     <th scope="row">{{ order.id }}</th>
                                     <td>{{ order.get_status_display }}</td>
                                     <td>{{ order.created_at }}</td>
                                     <td>{{ order.basket_history.total_sum }} руб.</td>
                                     <td>
-                                        <a href="{% url 'managements_orders_app:order' order.id %}" target="_blank">Детали</a>
+                                        <a href="{% url 'managements_orders_app:order' order.id %}"
+                                           target="_blank">Детали</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -44,11 +45,14 @@
                                     </td>
                                     <td><a href="{% url 'managements_orders_app:change_status' order.id 2 %}">В
                                         обработке</a></td>
-                                    <td><a href="{% url 'managements_orders_app:change_status' order.id 3 %}">Готов</a>
+                                    <td>
+                                        <a href="{% url 'managements_orders_app:change_status' order.id 3 %}">Готов</a>
                                     </td>
-                                    <td><a href="{% url 'managements_orders_app:change_status' order.id 4 %}">В пути</a>
+                                    <td><a href="{% url 'managements_orders_app:change_status' order.id 4 %}">В
+                                        пути</a>
                                     </td>
-                                    <td><a href="{% url 'managements_orders_app:change_status' order.id 5 %}">Выдан</a>
+                                    <td>
+                                        <a href="{% url 'managements_orders_app:change_status' order.id 5 %}">Выдан</a>
                                     </td>
                                 </tr>
                             {% endfor %}
