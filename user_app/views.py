@@ -3,11 +3,12 @@ from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from user_app.forms import UserLoginForm, UserRegistrationForm, UserProfileForm, PasswordChangeForm, EmailChangeForm
+from user_app.forms import UserLoginForm, UserRegistrationForm, UserProfileForm, EmailChangeForm
 from user_app.models import User, EmailVerification
 
 
@@ -108,7 +109,7 @@ def change_password(request):
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
-            update_session_auth_hash(request, user)  # Обновляем сеанс пользователя, чтобы избежать выхода из системы
+            update_session_auth_hash(request, user)
             messages.success(request, 'Ваш пароль был успешно изменен.', extra_tags='success')
             return HttpResponseRedirect(reverse('user_app:profile'))
         else:
