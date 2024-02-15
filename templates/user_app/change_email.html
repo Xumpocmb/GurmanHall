@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <main class="main">
+        <section class="register">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div class="register__card shadow-lg border-0 rounded-lg mt-5">
+                        <div class="card-header">
+                            <h3 class="text-center font-weight-light my-4">Смена email</h3>
+                        </div>
+                        <div class="card-body card-body-register">
+                            <form class="register__form" action="{% url 'user_app:change_email' %}" method="post">
+                                {% csrf_token %}
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="id_old_email">Старый email</label>
+                                        <input class="form-control py-4" id="id_old_email" type="email"
+                                               name="old_email" value="{{ user.email }}"
+                                               placeholder="Введите email">
+                                        {% if form.old_email.errors %}
+                                            <div class="profile-alert alert alert-danger alert-dismissible fade show"
+                                                 role="alert">
+                                                {{ form.old_email.errors }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="id_email">Новый email</label>
+                                        <input class="form-control py-4" id="id_email" type="email"
+                                               placeholder="Введите пароль" name="email" required/>
+                                        {% if form.email.errors %}
+                                            <div class="profile-alert alert alert-danger alert-dismissible fade show"
+                                                 role="alert">
+                                                {{ form.email.errors }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <input class="btn btn-success btn-block" type="submit" value="Сменить email">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

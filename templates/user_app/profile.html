@@ -124,13 +124,13 @@
                                 <a class="register__link" href="{% url 'orders_app:orders' %}">Мои заказы</a>
                             </div>
                             <div class="small">
-                                <a class="register__link" href="#">Сменить пароль</a>
+                                <a class="register__link" href="{% url 'user_app:change_password' %}">Сменить пароль</a>
                             </div>
                             <div class="small">
-                                <a class="register__link" href="#">Сменить email</a>
+                                <a class="register__link" href="{% url 'user_app:change_email' %}">Сменить email</a>
                             </div>
                             <div class="small">
-                                <a class="register__link" href="#">Удалить аккаунт</a>
+                                <a class="register__link" href="{% url 'user_app:delete_account' %}" style="color: darkred">Удалить аккаунт</a>
                             </div>
                         </div>
                     </div>

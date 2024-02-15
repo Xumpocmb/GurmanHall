@@ -1,11 +1,13 @@
-from django.contrib import auth, messages
+from django.contrib import auth
+from django.contrib import messages
 from django.contrib.auth import authenticate
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from user_app.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
+from user_app.forms import UserLoginForm, UserRegistrationForm, UserProfileForm, PasswordChangeForm, EmailChangeForm
 from user_app.models import User, EmailVerification
 
 
@@ -17,7 +19,8 @@ def register(request):
         form = UserRegistrationForm(data=request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Вы успешно зарегистрировались! Подтвердите регистрацию, перейдя по ссылке в письме.')
+            messages.success(request,
+                             'Вы успешно зарегистрировались! Подтвердите регистрацию, перейдя по ссылке в письме.')
             return HttpResponseRedirect(reverse('user_app:login'))
     else:
         form = UserRegistrationForm()
@@ -38,6 +41,10 @@ def login(request):
             if user and user.is_active:
                 auth.login(request, user)
                 return HttpResponseRedirect(reverse('user_app:profile'))
+            if user.is_archived:
+                messages.error(request, 'Ваш аккаунт был удален.'
+                                        'Если хотите восстановить аккаунт, напишите в поддержку.', extra_tags='danger')
+                return HttpResponseRedirect(reverse('shop_app:contacts'))
         else:
             messages.error(request, 'Неправильные имя или пароль', extra_tags='danger')
     else:
@@ -90,3 +97,54 @@ def email_verification(request, email, code):
     else:
         messages.error(request, 'Код подтверждения некорректен!', extra_tags='danger')
     return HttpResponseRedirect(reverse('user_app:login'))
+
+
+@login_required
+def change_password(request):
+    context = {
+        'title': 'Изменение пароля',
+    }
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Обновляем сеанс пользователя, чтобы избежать выхода из системы
+            messages.success(request, 'Ваш пароль был успешно изменен.', extra_tags='success')
+            return HttpResponseRedirect(reverse('user_app:profile'))
+        else:
+            messages.error(request, 'Пожалуйста, исправьте ошибки в форме.', extra_tags='danger')
+    else:
+        form = PasswordChangeForm(request.user)
+    context['form'] = form
+    return render(request, 'user_app/change_password.html', context=context)
+
+
+@login_required
+def change_email(request):
+    context = {
+        'title': 'Изменение email',
+    }
+    if request.method == 'POST':
+        form = EmailChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Ваш email был успешно изменен.', extra_tags='success')
+            return HttpResponseRedirect(reverse('user_app:profile'))
+    else:
+        form = EmailChangeForm(instance=request.user)
+    context['form'] = form
+    return render(request, 'user_app/change_email.html', context=context)
+
+
+@login_required
+def delete_account(request):
+    if request.method == 'POST':
+        current_user = User.objects.get(username=request.user)
+        current_user.is_archived = True
+        current_user.is_active = False
+        current_user.save()
+        auth.logout(request)
+        messages.success(request, 'Ваш аккаунт был успешно удален.', extra_tags='success')
+        return HttpResponseRedirect(reverse('shop_app:index'))
+    else:
+        return render(request, 'user_app/delete_account.html')
