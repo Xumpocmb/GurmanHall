@@ -1,10 +1,11 @@
-from django import forms
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm, PasswordChangeForm
-from user_app.models import User, EmailVerification
 import uuid
 from datetime import timedelta
+
+from django import forms
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django.utils.timezone import now
-from django.core.exceptions import ValidationError
+
+from user_app.models import User, EmailVerification
 
 
 class UserLoginForm(AuthenticationForm):
