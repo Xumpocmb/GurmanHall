@@ -8,7 +8,6 @@ socket.onmessage = function (e) {
     let data = JSON.parse(e.data);
     let eventType = data.event_type;
     console.log(eventType);
-    console.log("sadfasdfasdf");
     if (eventType === 'order_update') {
         let orderId = data.order_id;
         let statusText = data.order_status_text;
@@ -42,15 +41,27 @@ socket.onmessage = function (e) {
     if (eventType === 'order_create') {
         let orderId = data.order_id;
         let statusText = data.order_status_text;
-        console.log(orderId);
-        console.log(statusText);
         let createdAt = new Date(data.created_at);
         let totalSum = data.total_sum;
         let parentElement = document.getElementById("ordersBody");
         let formattedDate = `${createdAt.getDate()} ${getMonthName(createdAt.getMonth())} ${createdAt.getFullYear()} г. ${createdAt.getHours()}:${padZero(createdAt.getMinutes())}`;
         let newRow1 = parentElement.insertRow(0);
         newRow1.id = "order-" + orderId;
-        newRow1.className = "table-info";
+        if (statusText === "Создан") {
+            newRow1.className = "table-info";
+        } else if (statusText === "Подтвержден") {
+            newRow1.className = "table-primary";
+        } else if (statusText === "В обработке") {
+            newRow1.className = "table-warning";
+        } else if (statusText === "Готов") {
+            newRow1.className = "table-success";
+        } else if (statusText === "В пути") {
+            newRow1.className = "table-secondary";
+        } else if (statusText === "Выдан") {
+            newRow1.className = "table-dark";
+        } else if (statusText === "Отменен") {
+            newRow1.className = "table-danger";
+        }
         newRow1.innerHTML = `
             <th scope="row">${orderId}</th>
             <td>${statusText}</td>

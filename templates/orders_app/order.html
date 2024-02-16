@@ -21,14 +21,33 @@
                             {% for item in order.basket_history.baskets %}
                                 <tr>
                                     <th scope="row">{{ item.product_name }}</th>
-                                    <td><p>{{ order.description }} {{ item.sauce }} {{ item.description }}</p></td>
+                                    <td><p>{{ item.sauce }} {{ item.description }}</p></td>
                                     <td>{{ item.quantity }}</td>
                                     <td>{{ item.price }} руб.</td>
                                     <td>{{ item.sum }} руб.</td>
                                 </tr>
                             {% endfor %}
+                            <tr>
+                            {% if user.role == user.CHEF %}
+                                <td><a href="{% url 'managements_orders_app:change_status' order.id 2 %}">В обработке</a></td>
+                                    <td><a href="{% url 'managements_orders_app:change_status' order.id 3 %}">Готов</a></td>
+                            {% endif %}
+                            {% if user.role == user.OPERATOR %}
+                                <td><a href="{% url 'managements_orders_app:change_status' order.id 1 %}">Подтвердить</a></td>
+                                <td><a href="{% url 'managements_orders_app:change_status' order.id 6 %}">Отменить</a></td>
+                                <td><a href="{% url 'managements_orders_app:change_status' order.id 5 %}">Выдан</a></td>
+                            {% endif %}
+                            {% if user.role == user.COURIER %}
+                                <td><a href="{% url 'managements_orders_app:change_status' order.id 4 %}">В пути</a></td>
+                                <td><a href="{% url 'managements_orders_app:change_status' order.id 5 %}">Выдан</a></td>
+                            {% endif %}
+                            </tr>
                             </tbody>
                         </table>
+                    {% if user.role == user.CHEF %}
+                        <p class="float-right h4 mt-3">{{ order.address }}</p>
+                    {% endif %}
+                    <p class="float-right h4 mt-3" style="font-size: 14px; font-style: italic">{{ order.description }}</p>
                         <p class="float-right h4 mt-3">Итого {{ order.basket_history.total_sum }} руб.</p>
                     </div>
                 <div class="card-footer text-center">

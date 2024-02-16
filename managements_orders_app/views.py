@@ -7,10 +7,11 @@ from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
 from django.utils import timezone
 from user_app.models import User
+from django.core.paginator import Paginator
 
 
 def role_check(user):
-    return user.role in [User.CHEF, User.OPERATOR, User.COURIER]
+    return user.role in [User.CHEF, User.OPERATOR, User.COURIER] or user.is_superuser or user.is_staff
 
 
 @login_required
@@ -25,9 +26,14 @@ def orders(request):
         orders_for_user = Order.objects.filter(status=Order.ON_WAY)
     else:
         orders_for_user = Order.objects.all()
+
+    page = int(request.GET.get('page', 1))
+    paginator = Paginator(orders_for_user, 20)
+    current_page = paginator.page(page)
+
     context = {
         'title': 'Заказы',
-        'orders': orders_for_user,
+        'orders': current_page,
     }
     return render(request, 'managements_orders_app/orders.html', context=context)
 

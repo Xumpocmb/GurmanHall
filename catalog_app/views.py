@@ -38,8 +38,5 @@ def product(request, slug):
     return render(request, 'catalog_app/card.html', context=context)
 
 
-
-
-
 def not_found(request):
     return render(request, '404.html')

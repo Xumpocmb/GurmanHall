@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load catalog_tags %}
 
 {% block content %}
     <main class="main">
@@ -33,7 +34,7 @@
                                     {% elif order.status == order.DELIVERED %}table-dark
                                     {% elif order.status == order.CANCELLED %}table-danger
                                     {% endif %}">
-                                    <th scope="row">{{ order.id }}</th>
+                                    <th scope="row">{{ order.id }} | {{ order.delivery_method }}</th>
                                     <td>{{ order.get_status_display }}</td>
                                     <td>{{ order.created_at }}</td>
                                     <td>{{ order.basket_history.total_sum }} руб.</td>
@@ -65,8 +66,32 @@
                     </div>
                 </div>
             </div>
+            <nav aria-label="Page navigation example">
+                <ul id="pagination" class="pagination">
+                    <li class="page-item {% if not orders.has_previous %} disabled {% endif %}">
+                        <a class="page-link" href="{% if orders.has_previous %}?
+                {% change_params page=orders.previous_page_number %}{% else %}#{% endif %}"
+                           aria-label="Previous">
+                            <span aria-hidden="true">Назад</span>
+                        </a>
+                    </li>
+                    {% for page in orders.paginator.page_range %}
+                        {% if page >= orders.number|add:-2 and page <= orders.number|add:2 %}
+                            <li class="page-item {% if orders.number == page %}active{% endif %} ">
+                                <a class="page-link" href="?{% change_params page=page %}">{{ page }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    <li class="page-item {% if not orders.has_next %} disabled {% endif %}">
+                        <a class="page-link" href="
+                            {% if orders.has_next %}?
+                        {% change_params page=orders.next_page_number %}{% else %}#{% endif %}">Вперед</a>
+                    </li>
+                </ul>
+            </nav>
         </section>
     </main>
+    
 {% endblock %}
 
 {% block scripts %}

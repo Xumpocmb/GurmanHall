@@ -83,10 +83,11 @@
                                 {% if user.is_superuser or user.is_staff %}
                                     <li><a class="dropdown-item" href="{% url 'admin:index' %}" target="_blank">Админ-панель</a>
                                     </li>
-                                    <li><a class="dropdown-item" href="{% url 'managements_orders_app:orders' %}">Управление заказами</a></li>
+                                    {% if user.role == user.OPERATOR or user.role == user.CHEF or user.role == user.COURIER or user.is_superuser or user.is_staff%}
+                                    	<li><a class="dropdown-item" href="{% url 'managements_orders_app:orders' %}">Управление заказами</a></li>
+                                    {% endif %}
                                     <li><a class="dropdown-item" href="{% url 'orders_app:orders' %}">Мои заказы</a></li>
                                 {% endif %}
-                                <li><a class="dropdown-item" href="#">Заказы</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
